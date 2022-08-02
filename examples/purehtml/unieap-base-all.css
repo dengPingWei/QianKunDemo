@@ -1,0 +1,5892 @@
+body ,div {
+ scrollbar-face-color:#e9e9e9;
+ scrollbar-base-color:#f8f8f8; 
+ scrollbar-arrow-color:#787878; 
+ scrollbar-track-color:#f8f8f8; 
+ scrollbar-shadow-color:#e9e9e9; 
+ scrollbar-highlight-color:#f8f8f8; 
+ scrollbar-3dlight-color:#dbdbdb; 
+ scrollbar-darkshadow-Color:#aeaeae;	
+}
+
+body, div, dl, dt, dd, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+	margin: 0;
+	padding: 0;
+}
+
+
+body, div, dl, dt, dd, li, h1, h2, h3, h4, h5, h6, pre,p, blockquote, th, td,textarea,input{
+	outline:none;
+}
+
+body { 
+	/*color:#666; font:12px/18px  'Microsoft Yahei','微软雅黑',Arial,Verdana;*/
+	font: 12px Myriad,Helvetica,Tahoma,Arial,clean,sans-serif;
+	
+}
+
+html ,body{
+	height : 100%;
+
+}
+html.dj_ie10, body {
+	-ms-overflow-style: scrollbar;
+	overflow: hidden;
+}
+/** ie8下当html、body为100%,内嵌一个div，div设置了margin-top就出现了纵向滚动条**/
+.dj_ie8,.dj_ie8 body{
+	overflow:auto;
+}
+
+html.dj_ie7{
+	overflow:auto;
+}
+
+input::-ms-clear{
+	display:none;
+}
+
+
+.unieap .u-common-focus{
+	position: absolute;
+	outline-style : none;
+	outline-color : invert;
+	outline-width : 0px;
+	top :0px;
+	-moz-user-select : normal;
+	-khtml-user-select : normal;
+	-moz-outline : 0 none;
+}
+/*2019.4.10 sxf 媒体查询 兼容1280px宽 避免查询按钮遮挡*/
+@media screen and (max-width: 1290px) {
+	/*.unieap .adaptivepane {*/
+		/*min-width: 935px;*/
+	/*}*/
+	.unieap .query_buttons .u-form-btn{
+		/*padding: 1px 5px;*/
+	}
+	.unieap .query_buttons .u-form-dropBtn-common .u-form-btn{
+		padding: 1px 0px ;
+	}
+	.unieap .query_buttons .u-form-dropBtn-common{
+		padding: 0px 2px !important;
+	}
+
+	.unieap .fold-form-query{
+		right: 60px !important;
+	}
+	.unieap .fold-form-query .fold-form-text{
+		padding-right: 2px;
+	}
+	/*.unieap .fold-form-query .iconfont{*/
+		/*width: 18px;*/
+	/*}*/
+}
+@media screen and (min-width: 1290px) {
+	.unieap .fold-form-query{
+		right: 66px !important;
+	}
+}
+/**
+ * @summary：
+ * 		表单控件基础部分css样式,包括TextBox、TextBoxWithIcon、InlineEditBox、FileInput等控件样式。
+ * @example:
+ * 以下为TextBoxWitIcon控件的模板样式。
+ * |	①<div class="u-form-widget">
+ * |		②<div class="u-form-field">
+ * | 			③<div class="u-form-modified"></div>
+ * |            ④<div class="u-form-textbox-icon"></div>
+ * |            ⑤<div class="u-form-error"></div>
+ * |			⑥<div class="u-form-textbox-field">
+ * |               ⑦<input class="u-form-textbox-input" />
+ * |            </div>
+ * |			
+ * |        </div>
+ * |	</div>
+ * 对各个部分简述如下:
+ * ①设置整个控件的外层样式。
+ * ②设置控件里层样式，例如边框、高度
+ * ③当控件数据被修改后，设置修改标志的样式
+ * ④设置下拉框样式。例如显示为一个下拉框。
+ * ⑤设置控件错误提示样式
+ * ⑥设置文本框的外层样式
+ * ⑦设置文本框样式
+ */
+
+/*==========================Popup控件样式=======================================*/
+
+/**
+*@widget：
+*		{unieap.form.Popup}
+*@summary：
+*		定义所有弹出容器,即Popup的样式
+*/
+.unieap .u-popupcontainer{
+	position:absolute;
+	z-index:10001;
+	display:block;
+	outline:none;
+	text-decoration:none;
+}
+
+/**
+*@widget：
+*		{unieap.form.Popup}
+*@summary：
+*		定义弹出窗口中Iframe的样式
+*/
+.unieap .u-backgroundIframe{
+	border:0px;
+	/* css滤镜，对ie有效 去掉后datetextbox会出现问题  */
+	filter:Alpha(Opacity="0");
+	position:absolute;
+	z-index:10000;
+	width:0;
+	height:0;
+}
+
+
+/*==========================TextBox、TextBoxWithIcon控件样式=======================*/
+
+/**
+*@widget：
+*		{unieap.form.TextBox,unieap.form.TextBoxWithIcon}
+*@summary：
+*		定义所有Form组件最外层容器的样式，统一设定宽度等
+*/
+.unieap .u-form-widget{
+	margin : 0;
+	padding : 0px 0px 3px 0px;
+	width : 200px;
+	height: auto;
+	overflow : hidden;	/*解决：输入域输入文本过长，titlepane缩回再显示传格*/
+	display : inline-block;
+	vertical-align : middle; 
+	zoom : 1;
+}
+/** 必填样式 **/
+.unieap .u-form-required{
+	float : left;
+	/*margin-top : 6px;*/
+	margin-right: 2px;
+	width : 6px;
+	height : 6px;
+	color : red;
+	text-align : right;
+	visibility : hidden;
+	font-family: SimSun;
+}
+.unieap .u-form-globalEnabled{
+	margin-top: 2px;
+}
+/**
+*@widget：
+ *		{unieap.form.TextBox,unieap.form.TextBoxWithIcon}
+*@summary：
+*		定义组件里层的容器的样式，设定边框、高度等样式
+*/
+.unieap .u-form-field{
+	height : 100%;
+	border : 1px solid #7f9db9;  
+	overflow : hidden;
+	z-index: 2;
+}
+.unieap .xgrid-rowedit-inputDiv .u-form-field {
+	position: relative;
+	top: 1px;
+	height: 28px;
+}
+/**
+*@widget：
+*		{unieap.form.TextBox,unieap.form.TextBoxWithIcon}
+*@summary：
+*		定义Form组件的修改标识信息，通过float定位在容器的最左边
+*/
+.unieap .u-form-modified{
+	width: 5px; 
+	height: 5px; 
+	float : left;
+	overflow : hidden;
+	visibility : hidden;
+}
+
+
+/**
+*@widget：
+*		{unieap.form.TextBox,unieap.form.TextBoxWithIcon}
+*@summary：
+*		定义Form组件的错误信息，在组件最右边显示(可以覆盖必填信息)
+*/
+.unieap .u-form-error{
+	float: right; 
+	height: 16px;
+	width: 16px; 
+	margin-top:7px;
+	display:none;
+}
+
+/**
+*@widget：
+*		{unieap.form.TextBox,unieap.form.TextBoxWithIcon}
+*@summary：
+*		定义所有输入域外层容器的样式，设置overflow属性不需要指定width
+*/
+.unieap .u-form-textbox-field{
+	overflow : hidden;
+	zoom:100%;
+	height:100%;
+}
+
+/**
+*@widget：{unieap.form.TextBox,unieap.form.TextBoxWithIcon}
+*@summary：定义所有输入域的样式，去掉边框和内边距并设置宽度为100%
+*/
+.unieap .u-form-textbox-input{
+	border : 0;
+	margin : 0;
+	padding : 2px 1px 1px 0px;
+	margin-right : -1px; 
+	width : 100%;
+	font-size : 14px;
+	font-family: 'Microsoft YaHei','PingFang SC','Arial','sans-serif';
+	
+}
+
+/**
+*@widget：
+*		{unieap.form.TextBox}
+*@summary：
+*		定义所有文本输入框不可用的样式，为浅灰色优先级最高	
+*/
+.unieap .u-form-disabled{
+}
+/**
+*@widget：
+*		{unieap.form.TextBox}
+*@summary：
+*		定义所有文本输入框自读的样式
+*/
+.unieap .u-form-readOnly{
+}
+/**
+*@widget：
+*		{unieap.form.TextBox,unieap.form.TextBoxWithIcon}
+*@summary：
+*		定义所有文本输入框外层容器的错误信息样式，目前使其边框变红	
+*/
+.unieap .u-form-field.u-form-textbox-error{
+	border : 1px solid #F6222D;
+}
+.unieap .u-form-field.u-form-textbox-error:hover{
+	border : 1px solid #F6222D;
+}
+
+.unieap .u-form-textarea-input{
+	border-width:0px;
+	margin:0px;
+	margin-right:-1px; 
+	width: 100%;
+	zoom:1;
+	font:12px 'Microsoft YaHei','PingFang SC','Arial','sans-serif';
+}
+
+.dj_ie6 .u-form-textarea-input {
+	margin-top:-1px;	
+}
+
+/**
+*@widget：{unieap.form.TextBox,unieap.form.TextBoxWithIcon}WithIcon
+*@summary：定义所有带图标组件的图标样式，通过float定位在容器的最右边
+*/
+.unieap .u-form-textbox-icon{
+	border-left: 1px solid #7f9db9; 
+	width: 16px; 
+	height: 19px; 
+	float: right; 
+	overflow:hidden;
+	display:block;
+	text-decoration : none;
+	outline:none;
+}
+
+.unieap .u-form-textbox-icon-normal {
+}
+
+.unieap .u-form-textbox-icon-disabled {
+}
+
+
+
+
+/*=============================FileInput控件=====================================*/
+
+/**
+*@widget：
+*		unieap.form.FileInput
+*@summary：
+*		定义文件上传的外层容器样式，指定宽度、高度和相对定位	
+*/
+.unieap .u-form-file{
+	position:relative;
+	height:32px;
+	margin:0px 0px 8px 0px;
+	padding:0px;	
+	width: 200px;
+	overflow:hidden;
+	display:inline-block;
+	vertical-align:middle;
+	zoom : 1;
+}
+
+/**
+*@widget：
+*		unieap.form.FileInput
+*@summary：
+*		定义文件上传的浏览按钮和取消按钮样式，通过float定位在外层容器右边。用户可以自定义按钮大小和背景样式	
+*/
+.unieap .u-form-file-btn{
+	width : 60px;
+	height:30px;
+	cursor:pointer;
+	font-size:9pt;
+	border:1px solid #d9d9d9;
+	line-height:30px;
+	text-align:center;
+	float:right;
+	margin-left:8px;
+	border-radius: 4px;
+}
+.unieap .u-form-file-required{
+	float : left;
+	/*margin-top : 6px;*/
+	margin-right: 2px;
+	width : 6px;
+	height : 6px;
+	text-align : right;
+	z-index : 2;
+	background-color : transparent;
+	visibility : hidden;
+}
+/**
+*@widget：
+*		{unieap.form.FileInput}
+*@summary：
+		设置输入域的容器的样式，包括边框样式、高度、左偏移和显示层次等
+*/
+.unieap .u-form-file-fileField{
+	zoom:100%;
+	/*border: 1px solid #7f9db9; */
+	overflow:hidden;
+	position:relative;
+	height:30px;
+	padding-left:5px;
+}
+/**
+*@widget：
+*		{unieap.form.FileInput}
+*@summary：
+*		设置文件上传真实的File组件外层容器样式，使其File的浏览按钮与自定义的按钮右对齐，并使之容器透明显示。
+*/
+.unieap .u-form-file-realFileField{
+	width:62px;
+	position:absolute;
+	height : 27px;
+	right : 65px;
+	top :1px;
+	z-index: 1;
+	opacity:0;
+	filter:alpha(opacity:0);
+	overflow: hidden;
+}
+
+/*==============================InlineEditBox控件=================================*/
+
+
+.unieap .u-form-inlineWidget{
+	position: relative;	
+	margin:0px;
+	padding: 0px;	
+	width:200px;
+	display:inline-block;
+	text-align:left;
+	vertical-align:middle;
+	zoom : 1;
+}
+
+/**
+*@widget：
+*		{unieap.form.InlineEditBox}
+*@summary：
+*		设置InlineEditBox容器样式及底边线样式
+*/
+.unieap .u-form-inline{
+	width:100%;
+	height:19px;
+	padding:0px;
+	overflow:hidden;
+	border-bottom:1px solid #7f9db9;
+}
+
+/**
+ *@widget：
+ *		{unieap.form.InlineEditBox}
+ *@summary：
+ *		设置显示文本的样式，字体大小、位置、颜色等
+ */
+.unieap .u-form-inline-display{
+	line-height:21px;
+	font-size:12px;
+	white-space:pre;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.dj_ie6 .unieap .u-form-inline-display{
+	word-wrap:break-word;
+}
+
+/*==============================MultilineTexBox控件=================================*/
+.unieap .u-form-multiline-border-transparent {
+	border-color: transparent;
+}
+
+/** 统一处理a标题的linke、visited、hover、active样式 **/
+.unieap a:link.u-a-common{
+	color: #000;
+}
+
+.unieap a:visited.u-a-common{
+	color: #000;
+}
+
+.unieap a:hover.u-a-common{
+	color:#000;
+}
+
+.unieap a:active.u-a-common{
+	color :#000;
+}
+
+.dj_ie6 .unieap .u-form-widget,.dj_ie6 .unieap .u-form-file ,.dj_ie6 .unieap .u-form-inlineWidget{
+	display:inline;
+}
+.dj_ie7 .unieap .u-form-widget,.dj_ie7 .unieap .u-form-file ,.dj_ie7 .unieap .u-form-inlineWidget{
+	display:inline;
+}
+
+.dj_ie7 .unieap .u-form-inlineWidget{
+	background-color: #FFF;
+}
+
+
+.content-loading {
+	width: 140px;
+	height: 20px;
+	left: 35%;
+	position: absolute;
+}
+
+
+.content-loading-text {
+	text-align:left;
+	position: absolute;
+	display: inline-block;
+	padding:2px 0px 10px 25px;
+	font-size:13px;
+	font-family : tahoma, arial, helvetica, sans-serif;
+	font-style :italic;
+	color : #A9A9A9;
+	top: 0px;
+}
+
+input::-ms-clear{
+	display:none;
+}
+/*2018.6.26 增加table样式*/
+.query_form table {
+	margin-bottom: 4px;
+}
+.unieap  .query_form table td,.u-form table td{
+	white-space:nowrap;
+}
+.unieap .query_form table td label{
+	margin-left: 8px;
+	display: inline-block;
+	/*padding-bottom: 4px;*/
+	font-size: 14px;
+	min-width: 104px;
+}
+.unieap  .query_form table tr td:first-child label{
+	margin-left: 0px;
+}
+.unieap  .right_label table td label{
+	display: block;
+	text-align: right;
+	width: 100%;
+}
+/*2018.7.10 修改文本域*/
+.unieap table td.vertical_t{
+	vertical-align: top;
+}
+
+.unieap .margin_t_30{
+	margin-top: 30px;
+}
+.unieap .margin_b_30{
+	margin-bottom: 30px;
+}
+
+.unieap .u-form table td label:after{
+	content: ": ";
+	display: inline-block;
+	margin-left: 2px;
+	width: 4px;
+}
+/*动态添加的元素手动去掉冒号*/
+.unieap table  tr td>label.u-form-chkGroup-label:after{
+	content:"";
+	display: inline-block;
+	margin-left: 0px;
+	width: 0px;
+}
+/*人为添加的元素增加类名 去除冒号*/
+.unieap table  tr td .no_colon:after{
+	content:"";
+	display: inline-block;
+	margin-left: 0px;
+	width: 0px;
+}
+/*2018.8.2 sxf */
+.unieap .margin_l_16{
+	margin-left: 16px;
+}
+
+
+/** 表格必填样式 **/
+.unieap .u-grid .u-form-required{
+	display:none;
+}
+.unieap .u-xgrid .u-form-required{
+	display:none;
+}
+.unieap .u-xgrid .xgrid-rowedit-edit .xgrid-rowedit-inputDiv {
+	padding: 1px 5px 1px 5px;
+	border-left: 1px solid #e5e5e5;
+}
+
+/* 2019.12.11   宽松版的样式*/
+.unieap .loose_form table {
+	margin-bottom: 4px;
+}
+.unieap .loose_form table td,.u-form table td{
+	white-space:nowrap;
+}
+.unieap .loose_form table td label{
+	margin-left: 24px;
+	display: block;
+	padding-bottom: 8px;
+	min-width: 104px;
+
+}
+.unieap .loose_form table tr td:first-child label{
+	margin-left: 0px;
+}
+.unieap .loose_form .u-form-file-fileField{
+	height: 30px;
+}
+.unieap .query_form .u-form-file-fileField{
+	height: 24px;
+}
+.unieap .query_form .u-form-widget{
+	padding: 0px 0px 4px 0px;
+}
+.unieap .query_form .u-form-widget.start-date-text-box,
+.unieap .query_form .u-form-widget.end-date-text-box{
+	padding:0;
+}
+/**
+ * @summary:
+ * 		设置按钮控件的外层容器样式
+ * @widget:
+ * 		{unieap.form.Button}
+ */
+
+
+.unieap .u-form-dropBtn{
+	margin:0px;
+	padding: 0px;
+	height: 21px;
+	overflow:hidden;
+	vertical-align:middle;
+	display : inline-block;
+	position:relative;
+	white-space:nowrap;
+	outline:none;
+}
+
+.unieap .u-form-dropBtn-button{
+	height:100%;
+	overflow:hidden;
+}
+.unieap .u-form-dropBtn button{
+	border:0px;
+	height:100%;
+	white-space:nowrap;
+	word-break:keep-all;
+	padding-right: 0px;
+}
+
+.unieap .u-form-dropBtn-icon{
+	vertical-align:top;
+	width: 16px;
+	height: 100%;
+	overflow:hidden;
+	display:inline-block;
+	text-decoration : none;
+	outline:none;
+}
+
+.unieap .u-form-dropBtn-icon-normal {
+}
+
+.unieap .u-form-dropBtn-icon-disabled {
+}
+/**
+ * @summary:
+ * 		设置按钮控件的样式
+ * @widget:
+ * 		{unieap.form.Button}
+ */
+.unieap .u-form-btn {
+	height:100%;
+	white-space:normal;
+	cursor:pointer;
+	vertical-align:middle;
+	border:1px solid #d9d9d9;
+	border-radius: 4px;
+}
+
+
+/*.unieap .u-form-btn:focus{*/
+	/*background: transparent;*/
+/*}*/
+
+.unieap a.u-form-btn-outer,
+.unieap a.u-form-btn-outer-disabled{
+	display:inline-block;
+	height:32px;
+	margin-left: 7px;
+}
+
+.unieap .select_buttons a.u-form-btn-outer-disabled {
+	display: inline-block;
+    margin-left: 7px;
+    background-color: #1890FF !important;
+    color: white !important;
+    border: none;
+    height: 23px;
+    line-height: 17px;
+    overflow: hidden;
+}
+
+.unieap a:hover.u-form-btn-outer{
+}
+
+/**
+ * @summary:
+ * 		设置按钮上文字的样式
+ * @widget:
+ * 		{unieap.form.Button}
+ */
+
+.unieap .u-form-btn-txt {
+	white-space:nowrap;
+	padding:0;
+	text-align:center;
+	display:inline-block;
+	line-height: 28px;
+}
+
+/**
+ * @widget:
+ * 		{unieap.form.DropDownButton}
+ * @summary:
+ * 		设置下拉按钮控件右侧的下拉图标样式
+ */
+.unieap .u-form-triggerBtnImg{
+	position:absolute;
+	display:block;
+	width:16px;
+	height:16px;
+	margin:0 0 0 3px;
+}
+
+
+/**
+ * @widget:
+ * 		{unieap.form.CheckBox}
+ * @summary:
+ * 		设置复选框的样式
+ */
+.unieap .u-form-chk{
+	width:25px;
+	display:inline-block;
+	vertical-align:middle;
+	zoom : 1;
+	position: relative;
+	height: 100%;
+}
+
+/**
+ * @widget:
+ * 		{unieap.form.RadioButton}
+ * @summary:
+ * 		设置单选按钮的样式
+ */
+.unieap .u-form-rdoBtn{
+	width:25px;
+	display:inline-block;
+	vertical-align:middle;
+	zoom : 1;
+	position: relative;
+}
+.unieap .u-grid .formImgSelect , .unieap  .u-grid .u-form-chkInput {
+    left: 45%;
+    top: 50%;
+}
+
+
+/**
+ * @widget:
+ * 		{unieap.form.RadioButton、unieap.form.CheckBox}
+ * @summary:
+ * 		设置控件的输入框样式,例如<input type="radio" />和<input type="checkbox" />
+ */
+.unieap .u-form-chkInput {
+	padding: 0px;
+	margin: -8px 0px 0px 0px;
+	width: 16px;
+	height: 16px;
+	background-position:center center;
+	background-repeat:no-repeat;
+	opacity: 0;
+	z-index: 2;
+	position: absolute;
+	left: 0;
+	top: 50%;
+}
+
+/**
+ * @widget:
+ * 		{unieap.form.CheckBoxGroup,unieap.form.RadioGroup}
+ * @summary:
+ * 		设置CheckBoxGroup控件和RadioGroup控件的外层样式
+ */
+.unieap .u-form-chkGroup{
+	width: 200px;
+	overflow:hidden;
+	display:inline-block;
+	vertical-align:middle;
+	zoom : 1;
+}
+
+/**
+ * @widget:
+ * 		{unieap.form.CheckBoxGroup,unieap.form.RadioGroup}
+ * @summary:
+ * 		设置设置CheckBoxGroup控件和RadioGroup控件的里层样式。
+ */
+.unieap .u-form-chkGroup-border{
+	white-space: nowrap;
+	width:auto;
+	zoom:100%;
+	overflow:hidden;
+}
+/**
+ * @widget:
+ * 		{unieap.form.CheckBoxGroup,unieap.form.RadioGroup}
+ * @summary:
+ * 		设置设置CheckBoxGroup控件和RadioGroup控件的table样式。
+ */
+.unieap .u-form-chkGroup-tab{
+	width:100%;
+	table-layout:fixed;
+	margin-left: 0;
+}
+/**
+ * @widget:
+ * 		{unieap.form.CheckBoxGroup,unieap.form.RadioGroup}
+ * @summary:
+ * 		设置设置CheckBoxGroup控件和RadioGroup控件的里层文本样式。
+ */
+.unieap .u-form-chkGroup-label-td{
+	word-break:keep-all;
+	height:auto;
+}
+/**
+ * @widget:
+ * 		{unieap.form.CheckBoxGroup,unieap.form.RadioGroup}
+ * @summary:
+ * 		设置设置CheckBoxGroup控件和RadioGroup控件的里层文本位置。
+ */
+.unieap .u-form-chkGroup-label{
+	float: left;
+	margin-left: 0;
+}
+/**
+ * @widget:
+ * 		{unieap.form.CheckBoxGroup,unieap.form.RadioGroup}
+ * @summary:
+ * 		设置设置CheckBoxGroup控件和RadioGroup控件的选择控件样式。
+ */
+.unieap .u-form-chkGroup-cell{
+	width:16px;
+	position: relative;
+}
+.unieap .u-form-chkGroup-cell .u-form-chk{
+	width : 16px;
+}
+.unieap .u-form-chkGroup-cell .u-form-rdoBtn{
+	width : 16px;
+}
+.dj_ie6 .unieap .u-form-chk, .dj_ie6 .unieap .u-form-rdoBtn, .dj_ie6 .unieap .u-form-chkGroup,.dj_ie6 .unieap .u-form-dropBtn{
+	display:inline;
+}
+.dj_ie7 .unieap .u-form-chk,.dj_ie7 .unieap .u-form-rdoBtn,.dj_ie7 .unieap .u-form-chkGroup ,.dj_ie7 .unieap .u-form-dropBtn{
+	display:inline;
+}
+/*2018.6.25 按钮样式*/
+.unieap .limit_buttons{
+	text-align: right;
+	padding-bottom:4px;
+	/* padding-top:4px; */
+	font-size: 0;
+	min-height: 34px;
+	-webkit-text-size-adjust:none;/*兼容谷歌最小字體限制*/
+	
+}
+/*.unieap .limit_buttons:before{*/
+	/*content: "操作";*/
+	/*height:14px ;*/
+	/*border-left: 4px solid #2196F5;*/
+	/*margin-top: 9px;*/
+	/*display: inline-block;*/
+	/*float: left;*/
+	/*line-height: 14px;*/
+/*}*/
+.unieap .limit_buttons .title_btn{
+	float: left;
+	height: 14px;
+	line-height: 14px;
+	margin-top: 9px;
+	padding-left: 12px;
+	background: url("../../light/images/common/v-line.png")  no-repeat;
+	background-size: 4px 14px ;
+	font-size: 14px;
+}
+
+/*2018.7.26 sxf 修改单复选框定位*/
+.unieap .check_single{
+	height: 23px;
+	position: relative;
+	margin-left: 8px;
+}
+/*2018.9.21 增加下拉按钮样式*/
+.unieap .u-form-dropBtn-common{
+	padding: 0px 14px;
+	border: 1px solid #d9d9d9;
+}
+/*2019.5.8 sxf 查询列为下拉按钮时   调整样式*/
+.unieap .query_buttons .u-form-dropBtn-common{
+	padding: 0px 6px;
+}
+
+.unieap a.u-form-dropBtn-common .u-form-dropBtn-icon{
+	background: none ;
+	font-family: "iconfont" !important;
+	font-size: 14px;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	width: auto;
+	height: auto;
+	vertical-align: middle;
+	color: rgba(0,0,0,.65);
+}
+.unieap .select_buttons a.u-form-dropBtn-common .u-form-dropBtn-icon{
+	color:white;
+}
+.unieap .select_buttons  .u-form-btn{
+	padding: 1px 7px;
+}
+/* .unieap  .select_buttons .u-form-dropBtn button{
+	padding-right: 0px;
+} */
+.unieap .u-form-dropBtn-common .u-form-dropBtn-icon:before{
+	content: "\e6bc";
+}
+.unieap .u-form-dropBtn-common .u-form-dropBtn-icon.popActive:before{
+	content: "\e770";
+}
+/*鼠标滑过*/
+.unieap .u-form-dropBtn-common:hover{
+	border-color: #40a9ff;
+}
+.unieap .u-form-dropBtn-common .u-form-dropBtn-icon:hover{
+	color: #40a9ff;
+}
+.unieap .drop-down-button-hide{
+	display:none!important;
+}
+
+
+/*主按钮样式*/
+.unieap .u-form-dropBtn.u-form-dropBtn-primary{
+	padding: 0px 14px;
+	border: 1px solid #1890ff;
+	background: #1890ff;
+}
+.unieap .u-form-dropBtn-primary .u-form-btn{
+	/*border: 1px solid #1890ff;*/
+	background: #1890ff;
+}
+.unieap .u-form-dropBtn.u-form-dropBtn-primary:hover,.unieap .u-form-dropBtn-primary:hover .u-form-btn{
+	border-color: #40a9ff;
+	background-color: #40a9ff;
+}
+.unieap .u-form-dropBtn-primary .u-form-btn-txt{
+	color: #fff;
+}
+.unieap a.u-form-dropBtn-primary .u-form-dropBtn-icon{
+	background: none ;
+	font-family: "iconfont" !important;
+	font-size: 16px;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	width: auto;
+	height: auto;
+	vertical-align: middle;
+	color: #fff;
+}
+.unieap .u-form-dropBtn-primary .u-form-dropBtn-icon:before{
+	content: "\e668";
+}
+.unieap a.u-form-dropBtn-primary:hover .u-form-btn-txt,.unieap .u-form-dropBtn-primary  .u-form-btn:focus  .u-form-btn-txt{
+	color: #fff;
+}
+
+.unieap .fold-form-query .iconfont{
+	font-size: 14px;
+}
+.unieap .u-calendar-icon{
+  width:16px;
+  height:19px;
+  float:right;
+}
+
+.unieap .u-calendar-disabled{
+	width:16px;
+	height:19px;
+  	float:right;
+}
+
+/* Distributed as part of The Coolest DHTML Calendar
+   Author: Mihai Bazon, www.bazon.net/mishoo
+   Copyright Dynarch.com 2005, www.dynarch.com
+*/
+
+/* The main calendar widget.  DIV containing a table. */
+/*div.calendar { position: relative; }*/
+.calendar, .calendar table {
+  border: 1px solid #ffffff;
+  cursor: default;
+  z-index:10001;
+}
+
+.dijitTextBox{
+  height:18px;
+  margin:0px;
+}
+.calendar {
+  border-color: #8da3c1;
+}
+
+/* Header part -- contains navigation buttons and day names. */
+
+.calendar .button { /* "<<", "<", ">", ">>" buttons have this class */
+  text-align: center;    /* They are the navigation buttons */
+  padding: 2px;          /* Make the buttons seem like they're pressing */
+}
+
+.calendar .nav {
+}
+
+.calendar .nav div {
+	
+ /*
+  background: transparent url("../images/form/calendar/menuarrow.gif") no-repeat 100% 100%;
+  */	
+}
+
+.calendar thead tr { color: #000; background-color:#f4f4f4; }
+
+.calendar thead .title { /* This holds the current "month, year" */
+  text-align: center;
+  padding: 2px;
+}
+
+.calendar thead .headrow { /* Row <TR> containing navigation buttons */
+}
+
+.calendar thead .name { /* Cells <TD> containing the day names */
+  border-bottom: 1px solid #e8e8e8;
+  padding: 2px;
+  text-align: center;
+  color: #000;
+}
+
+.calendar thead .weekend { /* How a weekend day name shows in header */
+}
+
+.calendar thead .hilite { /* How do the buttons in header appear when hover */
+  padding: 2px 2px 1px 2px;
+}
+
+.calendar thead .active { /* Active (pressed) buttons in header */
+  padding: 3px 1px 0px 3px;
+}
+
+.calendar thead .daynames { /* Row <TR> containing the day names */
+}
+
+/* The body part -- contains all the days in month. */
+
+.calendar tbody .day { /* Cells <TD> containing month days dates */
+  width: 2em;
+  text-align: right;
+  padding: 2px 4px 2px 2px;
+}
+.calendar tbody .day.othermonth {
+}
+.calendar tbody .day.othermonth.oweekend {
+}
+
+.calendar table .wn {
+  padding: 2px 3px 2px 2px;
+  border-right: 1px solid #e8e8e8;
+}
+
+.calendar tbody .rowhilite td,
+.calendar tbody .rowhilite td.wn {
+}
+
+.calendar tbody td.tdtoday { 
+}
+
+.calendar tbody td.hilite { /* Hovered cells <TD> */
+  padding: 1px 3px 1px 1px;
+  border: 1px solid #356ab3;
+}
+
+.calendar tbody td.active { /* Active (pressed) cells <TD> */
+  padding: 2px 2px 0px 2px;
+}
+
+.calendar tbody td.weekend { /* Cells showing weekend days */
+}
+
+.calendar tbody td.selected { /* Cell showing selected date */
+  border: 1px solid #a2b3d2;
+  padding: 1px 3px 1px 1px;
+}
+
+.calendar tbody .disabled { color: #999; }
+
+.calendar tbody .emptycell { /* Empty cells (the best is to hide them) */
+  visibility: hidden;
+}
+
+.calendar tbody .emptyrow { /* Empty row (some months need less than 6 rows) */
+  display: none;
+}
+
+/* The footer part -- status bar and "Close" button */
+
+.calendar tfoot .footrow { /* The <TR> in footer (only one right now) */
+  text-align: center;
+}
+
+.calendar tfoot .ttip { /* Tooltip (status bar) cell <TD> */
+  padding: 2px;
+  border-top:solid 1px #cae5e2;
+}
+
+.calendar tfoot .hilite { /* Hover style for buttons in footer */
+  border: 1px solid #084;
+  padding: 1px;
+}
+
+.calendar tfoot .active { /* Active (pressed) style for buttons in footer */
+  padding: 2px 0px 0px 2px;
+}
+
+/* Combo boxes (menus that display months/years for direct selection) */
+
+.calendar .combo {
+  position: absolute;
+  display: none;
+  top: 0px;
+  left: 0px;
+  width: 4em;
+  cursor: default;
+  border-width: 0 1px 1px 1px;
+  border-style: solid;
+  border-color: #589c91;
+  color: #000;
+  z-index: 100;
+}
+
+.calendar .combo .label,
+.calendar .combo .label-IEfix {
+  text-align: center;
+  padding: 1px;
+
+}
+
+.calendar .combo .label-IEfix {
+  width: 3.6em;
+}
+
+.calendar .combo .hilite {
+}
+
+.calendar .combo .active {
+  border: 1px solid #a2b3d2;
+}
+
+.calendar td.time {
+  border-top: 0px solid #797979;
+  padding: 1px 0px;
+  text-align: center;
+}
+
+.calendar td.time .hour,
+.calendar td.time .minute,
+.calendar td.time .ampm {
+  padding: 0px 5px 0px 6px;
+}
+
+.calendar td.time .hour,
+.calendar td.time .minute {
+}
+
+.calendar td.time .ampm {
+  text-align: center;
+}
+
+.calendar td.time .colon {
+  padding: 0px 2px 0px 3px;
+}
+
+.calendar td.time span.hilite {
+  /*background: url("../images/form/calendar/hover-bg.gif"); color: #000;*/
+}
+
+.calendar td.time span.active {
+}
+.calendar thead .closeactive { /* Active (pressed) buttons in header */
+  padding: 3px 1px 0px 3px;
+}
+.calendar thead .closehilite { /* How do the buttons in header appear when hover */
+  padding: 2px 2px 1px 2px;
+}
+.calendar .close { 
+  text-align: center;    
+  padding: 2px;          
+}
+/*ǰһ�갴ť����ʽ*/
+.calendar thead .preyearactive { /* Active (pressed) buttons in header */
+  padding: 3px 1px 0px 3px;
+}
+.calendar thead .preyearhilite { /* How do the buttons in header appear when hover */
+  padding: 2px 2px 1px 2px;
+}
+.calendar .preyear { 
+  text-align: center;    
+  padding: 2px;          
+}
+/*ǰһ�°�ť����ʽ*/
+.calendar thead .premonthactive { /* Active (pressed) buttons in header */
+  padding: 3px 1px 0px 3px;
+}
+.calendar thead .premonthhilite { /* How do the buttons in header appear when hover */
+  padding: 2px 2px 1px 2px;
+}
+.calendar .premonth { 
+  text-align: center;    
+  padding: 2px;          
+}
+/*��һ�°�ť����ʽ*/
+.calendar thead .nextmonthactive { /* Active (pressed) buttons in header */
+  padding: 3px 1px 0px 3px;
+}
+.calendar thead .nextmonthhilite { /* How do the buttons in header appear when hover */
+  padding: 2px 2px 1px 2px;
+}
+.calendar .nextmonth { 
+  text-align: center;    
+  padding: 2px;          
+}
+/*��һ�갴ť����ʽ*/
+.calendar thead .nextyearactive { /* Active (pressed) buttons in header */
+  padding: 3px 1px 0px 3px;
+}
+.calendar thead .nextyearhilite { /* How do the buttons in header appear when hover */
+  padding: 2px 2px 1px 2px;
+}
+.calendar .nextyear { 
+  text-align: center;    
+  padding: 2px;          
+}
+/*���찴ť����ʽ*/
+.calendar thead .todayactive { /* Active (pressed) buttons in header */
+  padding: 3px 1px 0px 3px;
+}
+.calendar thead .todayhilite { /* How do the buttons in header appear when hover */
+  padding: 2px 2px 1px 2px;
+}
+.calendar .today { 
+  text-align: center;    
+  padding: 2px;          
+}
+/*nian*/
+.unieap .DateTextBox_lefta{
+	height:15px;
+	}
+.unieap .DateTextBox_righta{
+	height:15px;
+	}
+.unieap .DateTextBox_aright{
+	margin-left:30px;
+	}
+.unieap .DateTextBox_span{
+	margin-left:15px;
+	}
+.unieap .DateTextBox_button{
+	border:1px solid #000000;
+	margin-left:2px;
+	color:#FFFFFF;
+	background-color:#003366;
+	height:18px;
+	}
+.unieap .DateTextBox_butClo{
+	border:1px solid #000000;
+	color:#FFFFFF;
+	background-color:#003366;
+	}
+.unieap .DateTextBox_top{
+	text-align:center;
+	background-color:#ffffff;
+	}
+.unieap .DateTextBox_tdright {
+	border:1px solid #000000;
+	text-align:right;
+	background-color:#E0E9F0;
+	height:20px;
+	}
+.unieap .DateTextBox_tdleft {
+	border:1px solid #000000;
+	text-align:left;
+	background-color:#E0E9F0;
+	height:20px;
+	}
+.unieap .DateTextBox_tds{
+	border:1px solid #000;
+	}
+	
+.unieap .DateTextBox_td{
+	width:40px;
+	height:20px;
+	}
+.unieap .DateTextBox_tr{
+	height:20px;
+	}
+.unieap .DateTextBox_tdbut{
+	border:1px solid #000099;
+	text-align:center;
+	background-color:#E0E9F0;
+	}
+.unieap .DateTextBox_div{
+	width:160px;
+	background-color:#ffffff;
+	display:block;
+	position:absolute;
+	}
+.unieap .DateTextBox_table{
+	background-color:#ffffff;
+	BORDER-COLLAPSE: collapse ;
+	}
+
+
+
+/*----------------------------------双日历控件样式扩展----------------------------*/
+.start-end-date-popup{
+}
+div.start-date-popup{
+	border-radius:5px 0px 0px 5px;
+	box-shadow: 0 2px 8px 0 rgba(0,0,0,0.30);
+}
+div.end-date-popup{
+	border-radius:0px 5px 5px 0px;
+	box-shadow: 2px 2px 7px 0 rgba(0,0,0,0.30);
+	border-left:none;
+}
+
+.unieap .DateTextBox_tdright,.unieap .DateTextBox_tdleft{
+	display: none;
+}
+
+
+.start-date-text-box , .end-date-text-box {
+	width: 0px !important;
+	height: 0px !important;
+	position: absolute;
+}
+.unieap .start-end-date-text {
+	min-width: 220px;
+	width:100%;
+}
+
+.unieap .start-end-date-text {
+	min-width: 220px;
+	width:100%;
+}
+
+.unieap .start-end-date-text-YM {
+	min-width: 180px;
+	width:100%;
+}
+
+.unieap .start-date-popup .DateTextBox_div{
+	box-shadow: 0 2px 8px 0 rgba(0,0,0,0.30);
+}
+.unieap .end-date-popup .DateTextBox_div{
+	box-shadow: 3px 2px 7px 0 rgba(0,0,0,0.30);
+}
+.unieap .DateTextBox_table{
+	border-radius:5px;
+}
+
+.unieap .start-date-popup .DateTextBox_table,.unieap .end-date-popup .DateTextBox_table{
+	border-radius:0;
+}
+.unieap .preTenYear{
+	/*background: url(../images/left-regular@2x.png) no-repeat center;*/
+	background-size:20px 20px;
+}
+.unieap .preTenYear:hover{
+	/*background: url(../images/left-regular-hover@2x.png) no-repeat center;*/
+	background-size:20px 20px;
+}
+.unieap .nextTenYear{
+	/*background: url(../images/right-regular@2x.png) no-repeat center;*/
+	background-size:20px 20px;
+}
+.unieap .nextTenYear:hover{
+	/*background: url(../images/right-regular-hover@2x.png) no-repeat center;*/
+	background-size:20px 20px;
+}
+.unieap .DateTextBox_td:hover {
+	background: #e0eeff!important;
+	color:#000!important;
+}
+.unieap .DateTextBox_div{
+	margin-top:10px;
+}
+.unieap .DateTextBox_tds{
+	padding-top:11px;
+	border: 0px;
+}
+.unieap .DateTextBox_div{
+	border:none;
+	box-shadow:0 2px 8px 0 #c6c6c6;
+}
+.unieap .DateTextBox_tds{
+	border-left: 1px solid #ebebeb;
+	padding: 18px 0px 21px 0px;
+}
+.unieap .DateTextBox_td{
+	width: 53px;
+	height: 23px;
+	text-align: center;
+}
+.unieap .DateTextBox_div{
+	border: 1px solid #ebebeb;
+    box-shadow: 4px 6px 5px 0 rgba(0,0,0,0.30);
+    border-radius: 5px;
+    width: 222px;
+	background-color:#ffffff;
+	display:block;
+	position:absolute;
+}
+
+
+
+/*!**--------------------------日历控件------------------------**!*/
+/*div.calendar {
+    position: relative;
+    background:#ffffff;
+    border:1px solid #ebebeb;
+    box-shadow:0 2px 8px 0 #c6c6c6;
+    border-radius:5px;
+    width:255px;
+    height:auto;
+    padding:5px 12px 13px;
+    margin-top:10px;
+}
+.calendar thead .title {
+    color: #333;
+    border-bottom: 1px solid #b6bcc2;
+    background: #fff;
+    height:34px;
+    border: none;
+    padding: 0;
+}
+.calendar .today {
+    background: #fff;
+    height: 34px;
+    color: #4e92f5;
+}
+.calendar .preyear {
+    background: url(../images/calendar/left-year@2x.png) no-repeat center #fff;
+    background-size:14px 10px;
+    height: 34px;
+}
+/*zhaos日期控件箭头后面图片去掉*!*/
+/*.calendar thead .preyearactive {
+    background: url(../images/calendar/left-year@2x.png) no-repeat center #fff;
+    background-size:14px 10px;
+    height: 34px;
+}
+.calendar .premonth {
+    background: url(../images/calendar/left-month@2x.png) no-repeat center #fff;
+    background-size:7px 10px;
+    height: 34px;
+}
+/*zhaos日期控件箭头后面图片去掉*!*/
+/*.calendar thead .premonthactive{
+    background: url(../images/calendar/left-month@2x.png) no-repeat center #fff;
+    background-size:7px 10px;
+    height: 34px;
+}
+.calendar .nextmonth {
+    background: url(../images/calendar/right-month@2x.png) no-repeat center #fff;
+    background-size:7px 10px;
+    height: 34px;
+}
+/*zhaos日期控件箭头后面图片去掉*/
+/*.calendar thead .nextmonthactive{
+    background: url(../images/calendar/right-month@2x.png) no-repeat center #fff;
+    background-size:7px 10px;
+    height: 34px;
+}
+
+.calendar .nextyear {
+    background: url(../images/calendar/right-year@2x.png) no-repeat center #fff;
+    background-size:14px 10px;
+}
+/*zhaos日期控件箭头后面图片去掉*/
+/*.calendar thead .nextyearactive {
+    background: url(../images/calendar/right-year@2x.png) no-repeat center #fff;
+    background-size:14px 10px;
+}
+.calendar thead .daynames {
+    background-color: #fff;
+}
+.calendar tfoot .ttip {
+    padding: 8px 2px;
+    background: #fff;
+
+}
+.calendar tbody td.selected {
+    color: #fff;
+    background: #4e92f5;
+    border-radius: 100%;
+    font-weight: normal;
+    padding:0;
+    background: url(../images/select.png) no-repeat center center;
+    background-size: 30px 30px;
+    color: #fff;
+}
+
+.calendar tbody .day {
+    font-family: verdana,tahoma,sans-serif;
+    font-size: 11.76px;
+    color: #666666;
+    line-height: 33.4px;
+    text-align: center;
+    padding: 0px;
+}
+.calendar, .calendar table {
+    font-size: 11px;
+    color: #000;
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFFF;
+    font-family: "trebuchet ms",verdana,tahoma,sans-serif;
+}
+
+.calendar .combo {
+    color: #000;
+    font-size: 90%;
+    background-color: #fff;
+    width: 60px;
+    border:1px solid #ebebeb;
+    box-shadow:4px 6px 5px 0 rgba(0,0,0,0.30);
+    left: 140px;
+    top: 58px;
+}
+calendar .combo .label, .calendar .combo .label-IEfix {
+    text-align: center;
+    padding: 1px;
+    font-size: 12px;
+}
+
+.calendar tbody td.hilite {
+    background: #E0EEFF;
+    border-radius: 100%;
+    /*修改时间控件样式晃动*/
+   /* color: #666666;
+    padding:0;
+    border:0;
+    background: url(../images/hilite.png) no-repeat center center;
+    background-size: 30px 30px;
+
+}
+
+/*JiaXin 日期控件*/
+
+
+/*.calendar thead .todayhilite {
+    background: #f0f5f7;
+}
+
+
+.calendar tbody .day.othermonth.oweekend {
+    color: #9b9b9b;
+}
+.calendar tbody td.weekend {
+    color: #666;
+}
+.calendar thead .weekend {
+    color: #666;
+}
+.calendar tr .daysrow{
+    padding: 2px 0;
+}
+.calendar .combo .active{
+    border: 1px solid #4E92F5;
+}
+.sc-calendar {
+    width: 500px;
+    height: 500px;
+    text-align: center;
+    font-family: "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", "sans-serif";
+    color: #4A4A4A;
+    box-shadow: 2px 4px 5px #bdbdbd;
+    border-width: 1px 0 0 1px;
+    border-color: #E6E4E0;
+    border-style: solid;
+    float: left;
+    margin-right: 20px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-text-size-adjust: none;
+    font-size: 16px;
+}
+.sc-calendar {
+    width: 500px;
+    height: 500px;
+    text-align: center;
+    font-family: "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", "sans-serif";
+    color: #4A4A4A;
+    box-shadow: 2px 4px 5px #bdbdbd;
+    border-width: 1px 0 0 1px;
+    border-color: #E6E4E0;
+    border-style: solid;
+    float: left;
+    margin-right: 20px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-text-size-adjust: none;
+    font-size: 16px;
+}
+.calendar thead .name {
+    border-top: 1px solid #e8e8e8;
+    padding: 2px;
+    text-align: center;
+    color: #000;
+}
+.calendar thead .title {
+    font-weight: normal;
+}
+
+.calendar tfoot .footrow {
+    display:none;
+}
+
+.calendar .combo .hilite {
+    background-color:#E0EEFF;
+}
+
+.calendar .combo .active {
+    background: #4E92F5; color: #fff;
+}
+
+.calendar .today {
+    font-weight: normal;
+}*/
+.unieap .u-combobox-list {
+	/*border: 1px solid #989898;*/
+	z-index: 10001;
+	position: absolute;
+	display: block;
+	outline: none;
+	text-decoration: none;
+	left: -1000px;
+	top: -1000px;
+	box-shadow: 0 2px 8px rgba(0,0,0,.15);
+	margin-left: 6px;
+}
+
+.unieap .u-combobox-items-container {
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	background-color: #FFFFFF;
+}
+
+.unieap .u-combobox-item {
+	width: 100%;
+	cursor: pointer;
+	height: 34px;
+}
+
+.unieap .u-combobox-item .match {
+	
+}
+
+.unieap .u-combobox-list-header {
+	width: 100%;
+}
+
+.unieap .u-combobox-list-header table {
+	border-collapse: collapse;
+	width: 100%
+}
+
+.unieap .u-combobox-list-header table th {
+	border-bottom: 1px solid #989898;
+	text-align: center;
+	padding: .2em;
+	white-space: nowrap;
+}
+
+.unieap .u-combobox-items-container table {
+	border-collapse: collapse;
+	width: 100%;
+	height: 100%;
+}
+
+.unieap .u-combobox-items-container table td span{
+	padding: 5px 12px;
+	display: block;
+	line-height: 22px;
+	font-size: 14px;
+	white-space:nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 32px;
+	/*word-break: break-all;*/
+}
+
+.unieap .u-combobox-readonly {
+	cursor: normal
+}
+
+.unieap .u-combobox-items-container .u-comobobox-item-hover {
+}
+
+.unieap .u-combobox-modified,.unieap .u-combobox-require {
+	display: block
+}
+
+  /*sxf 2019.4.26 快速查询样式*/
+.unieap .quickSearchList .u-combobox-list-header table{
+	table-layout: fixed;
+	border-top: none;
+	position: absolute;
+}
+.unieap .quickSearchList .u-combobox-list-header{
+	margin-top: 0;
+	background: #f3f3f3;
+	position: relative;
+	height: 39px;
+}
+.unieap .quickSearchList .u-combobox-items-container table {
+	width: 100%;
+}
+.unieap .quickSearchList{
+	/* max-width: 600px; */
+	min-width: 300px;
+}
+.unieap .quickSearchList .u-combobox-items-container{
+	overflow: auto !important;
+}
+.unieap .form-query-xd .u-combobox-items-container {
+	overflow: initial !important;
+}
+
+.unieap .quickSearchList .u-combobox-items-container table{
+	table-layout: fixed;
+}
+.unieap .quickSearchList .u-combobox-list-header table th, .unieap .quickSearchList .u-combobox-items-container table td{
+    text-align: left;
+    padding-left: 10px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+
+}
+.unieap  .quickSearchList .u-combobox-items-container table td span{
+    display: inline;
+    padding: 0;
+}
+.unieap .u-form-fieldset {
+	/*margin-bottom: 5px;*/
+	border: 0;
+	padding: 16px;
+	/*border: 1px solid #7f9db9;*/
+	/*padding: 7px;*/
+	vertical-align: middle;
+	zoom: 1;
+	overflow: hidden;
+	width: auto;
+}
+
+.unieap .u-form-fieldset-btn {
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+	float: left !important;
+	margin-right: 3px;
+	border: 0;
+}
+
+.unieap .u-form-fieldset-label {
+	height: 15px;
+	line-height: 17px;
+	font-size: 14px;
+}
+
+.unieap .u-form-fieldset-desc {
+	margin-left: 5px;
+	height: 15px;
+	line-height: 17px;
+}
+
+.unieap .dijitClosed .u-form-fieldset-hiddenNode {
+	display: none;
+}
+
+.unieap .dijitOpen .u-form-fieldset-btn {
+}
+
+.unieap .dijitOpen .u-form-fieldset-mouseover .u-form-fieldset-btn {
+	background-position: -15px;
+}
+
+.unieap .dijitClosed .u-form-fieldset-btn {
+	background-position: -30px;
+	margin-left: 1px;
+}
+
+.unieap .dijitClosed .u-form-fieldset-mouseover .u-form-fieldset-btn {
+	background-position: -45px;
+	margin-left: 1px;
+}
+
+.unieap .u-form-fieldset legend {
+}
+
+.dj_ie .unieap .u-form-fieldset legend {
+	margin-bottom: 6px;
+}
+
+.dj_ie .unieap .u-form-fieldset {
+	padding-top: 0;
+	margin: 0px 2px 0px 2px;
+}
+
+.dj_ie6 .u-form-fieldset-bwrap {
+	zoom: 1;
+}
+.unieap .u-form-slider {
+	font-size: 0px;
+}
+.unieap .u-form-slider-x{
+	position: relative;
+}
+
+.unieap .u-form-slider-x .u-form-slider-leftcap{
+	position: absolute;
+	left: 0;
+}
+
+.unieap .u-form-slider-x .u-form-slider-rightcap{
+	position: absolute;
+	right: 0;
+}
+
+.unieap .u-form-slider-x .u-form-slider-rail{
+	position: absolute;
+}
+
+.unieap .u-form-slider-x .u-form-slider-progress{
+	width: 0px;
+	position: relative;
+}
+
+.unieap .u-form-slider-y{
+	position: relative;
+}
+
+.unieap .u-form-slider-y .u-form-slider-leftcap{
+	position: absolute;
+	top: auto;
+	bottom: 0;
+}
+
+.unieap .u-form-slider-y .u-form-slider-rightcap{
+	position: absolute;
+}
+
+.unieap .u-form-slider-y .u-form-slider-rail{
+	position: absolute;
+}
+
+.unieap .u-form-slider-y .u-form-slider-progress{
+	height: 0px;
+	position: absolute;
+	bottom: 0;
+}
+@CHARSET "UTF-8";
+.unieap .imageviewer-wrapper {
+	position: absolute;
+	border: 1px solid black;
+	overflow: hidden;
+}
+
+.unieap .imageviewer-image {
+	position: absolute;
+}
+
+.unieap .imageviewer-image-rotate90 {
+	transform: rotate(90deg);
+	transform-origin:50% 50%;
+	-webkit-transform: rotate(90deg);
+	-webkit-transform-origin:50% 50%;
+	-moz-transform: rotate(90deg);
+	-moz-transform-origin:50% 50%;
+	-ms-transform: rotate(90deg);
+	-ms-transform-origin:50% 50%;
+	filter: progid:DXImageTransform.Microsoft.Matrix(M11=0, M12=-1, M21=1, M22=0, SizingMethod="auto expand");
+}
+
+.unieap .imageviewer-image-rotate180 {
+	transform: rotate(180deg);
+	transform-origin:50% 50%;
+	-webkit-transform: rotate(180deg);
+	-webkit-transform-origin:50% 50%;
+	-moz-transform: rotate(180deg);
+	-moz-transform-origin:50% 50%;
+	-ms-transform: rotate(180deg);
+	-ms-transform-origin:50% 50%;
+	filter: progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=0, M21=0, M22=-1, SizingMethod="auto expand");
+}
+
+.unieap .imageviewer-image-rotate270 {
+	transform: rotate(270deg);
+	transform-origin:50% 50%;
+	-webkit-transform: rotate(270deg);
+	-webkit-transform-origin:50% 50%;
+	-moz-transform: rotate(270deg);
+	-moz-transform-origin:50% 50%;
+	-ms-transform: rotate(270deg);
+	-ms-transform-origin:50% 50%;
+	filter: progid:DXImageTransform.Microsoft.Matrix(M11=0, M12=1, M21=-1, M22=0, SizingMethod="auto expand");
+}
+
+.unieap .imageviewer-toolbar {
+	position: absolute;
+	bottom: 10px;
+	z-index: 5000;
+	width: 100%;
+	height: 40px;
+}
+.unieap .imageviewer-toolbar-common {
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+.unieap .imageviewer-toolbar>.imageviewer-toolbar-common {
+	visibility:hidden !important;
+}
+.unieap .imageviewer-toolbar:hover>.imageviewer-toolbar-common {
+	visibility:visible !important;
+}
+
+.unieap a.imageviewer-toolbar-btn-rotate-left {
+	float: left;
+}
+.unieap a.imageviewer-toolbar-btn-rotate-right {
+	float: left;
+}
+.unieap .imageviewer-toolbar-btn-fit {
+	float: left;
+}
+.unieap .imageviewer-toolbar-input-zoom-rate {
+	float: right;
+}
+.unieap a.imageviewer-toolbar-btn-zoom-out {
+	float: right;
+}
+.unieap a.imageviewer-toolbar-btn-zoom-in {
+	float: right;
+}
+
+.unieap .imageviewer-drag-start {
+	cursor: move;
+}
+@CHARSET "UTF-8";
+
+.unieap .uploader {
+	position: relative;
+	zoom: 1;
+}
+
+.unieap .uploader .u-grid-text2 {
+	height: 22px;
+}
+
+.unieap .uploader .progress_background {
+	position: absolute;
+	left: -2px;
+	height: 22px;
+	background-color: #87CEFA;
+}
+
+.unieap .uploader .progress_value {
+	position: absolute;
+	z-index: 100;
+	width: 100%;
+	height: 22px;
+	text-align: center;
+	color: white;
+}
+
+.unieap .uploader .moxie-shim-html5 {
+	/* height: auto !important; */
+	z-index: 100 !important;
+	cursor: pointer;
+}
+/**
+ * grid的基本样式
+ */
+.unieap .u-grid {
+	font-size: 12px;
+	/*overflow:hidden;*/
+	position: relative;
+	border:0px;
+	
+}
+
+
+/* master header */
+.unieap .u-grid-master-header {
+	table-layout: fixed;
+	width: 100%;
+}
+
+/* master view */
+.unieap .u-grid-master-views {
+	table-layout: fixed;
+	width: 100%;
+}
+
+
+.unieap .u-grid-master-foot{
+	padding:4px 7px 4px 7px;
+	font:11px verdana;
+}
+.unieap .u-grid-master-foot .express{
+}
+
+
+.unieap .u-grid-view-cell{
+	position:relative;
+	width:100%;
+	height:100%;
+	padding:0px;
+}
+/**
+* 锁定视图横向滚动条样式
+*/
+.unieap .u-grid-noscrollbar{
+	width:100%;
+	height:17px;
+	padding:0px;
+	margin:0px;
+	overflow:hidden;
+}
+
+.unieap .u-grid-header {
+	width:100%;
+}
+
+.unieap .u-grid-header-scrollbox {
+	overflow: hidden; 
+	width: 100%;
+}
+.unieap .u-grid-scrollbox {
+	overflow: auto;
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.unieap .u-grid-scrollbox-IE11 {
+	overflow: auto;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 1;
+}
+
+.unieap .u-grid-header-content{
+	width : auto;
+	zoom : 100%;
+	overflow:hidden;
+}
+.unieap .u-grid-header-content .u-grid-rowbar-table{
+}
+.unieap .u-grid-contentbox{
+	height:100%;
+	width:100%;
+	overflow:hidden;
+	position:relative;
+}
+.unieap .u-grid-content {
+	position: relative;
+	/*overflow: hidden;*/
+	outline: none;
+}
+
+/* row */
+.unieap .u-grid-row {
+	/*border-bottom: 1px solid #e8e8e8;*/
+	/* height:34px; */
+}
+
+.unieap  .acct_slry_grid .u-grid-row {
+	/*height:43px;*/
+}
+
+/** 修正IE6下detail中grid渲染不正确的bug,见U_EAP00006237 **/
+.dj_ie6 .unieap .u-grid-row {
+	position:relative;
+}
+.unieap .u-grid-row-odd {
+}
+
+.unieap .u-grid-row-over {
+	/*background: url(../images/grid/over_bg.gif) repeat-x top #efefef;*/
+}
+.unieap .u-grid-row-selected {
+	/*background: url(../images/grid/grid_row_selected_bg.gif) repeat-x top; */
+	/** 当grid有复选框时，选中复选框，背景颜色优先级应该提高 **/
+}
+.unieap .u-grid-row-current {
+	/*background: url(../images/grid/over_bg.gif) repeat-x top #efefef;*/
+}
+.unieap .u-grid-row-table {
+	table-layout: fixed;
+	width:100%;
+}
+.unieap .u-grid-inner{
+	zoom:100%;
+	overflow:hidden;
+	width:100%; 
+	position:relative;
+}
+.unieap .u-grid-locked{
+	position:absolute;
+	width:100%;
+	visibility:hidden;
+	bottom:0px;
+	z-index : 2;
+}
+.dj_ie6 .unieap .u-grid-locked {
+	margin-bottom : -1px;
+}
+.unieap .u-grid-locked-content{
+	height:100%;
+	/** 解决MasterDetail中嵌套的Grid带有锁定行时显示不正确的问题 */
+	position : relative;
+	overflow:hidden;
+	visibility:visible;
+}
+.unieap .u-grid-locked-content-rows {
+	overflow:hidden;
+	width:100%;
+	zoom:1;
+}
+.unieap .u-grid-locked-content-rows .u-grid-cell {	
+}
+
+.unieap .u-grid-locked-content-rows .u-grid-toplockedrow .u-grid-cell {	
+}
+
+.unieap .u-grid-invisible {
+}
+
+.unieap .u-grid-cell {	
+
+	font-weight : normal;
+
+}
+
+
+.content-loading {
+	width: 140px;
+	height: 20px;
+	left: 35%;
+	position: absolute;
+}
+
+.content-loading-text {
+	text-align:left;
+	position: absolute;
+	display: inline-block;
+	padding:2px 0px 10px 25px;
+	font-size:13px;
+	font-family : tahoma, arial, helvetica, sans-serif;
+	font-style :italic;
+	color : #A9A9A9;
+	top: 0px;
+}
+
+
+/** 修正MasterDetail中嵌套的Grid表头分隔线不明线的bug **/
+.unieap .u-grid-hcell {
+}
+/* .unieap .headerRight5 .u-grid-row-table .u-grid-hcell[rowspan="2"]:first-child {
+	/* border-right:none;
+	display: none */
+/* } */
+
+/** 数字列标题默认居中对齐 */
+.unieap th.u-grid-text2-number {
+	text-align: center;
+	/* padding-right:12px; */
+}
+.unieap th.u-grid-text2-number  .u-grid-header-cell{
+	/* padding-right: 12px; */
+    box-sizing: border-box !important;
+}
+.unieap td.u-grid-text2-number {
+	text-align: right;
+}
+/** 数字列内容默认居右对齐 */
+.unieap td.u-grid-text2-number .u-grid-text {
+	padding-right:15px;
+}
+
+.unieap .u-grid-content .u-grid-cell{
+	/* 解决bug U_EAP00008244 */
+	position: relative;
+	border-right : 1px solid #eee;
+	
+	/** ie6下不显示省略号**/
+	/*overflow : hidden;*/
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+.unieap .u-grid-text, .unieap .u-grid-header-cell nobr{
+	padding: 0 5px 0 5px;
+	vertical-align:middle;
+	/*overflow : hidden;*/
+}
+.u-grid-text2{
+	overflow : hidden;
+	width:100%;
+	height:100%;
+	zoom:1;
+	text-overflow:ellipsis;
+	-ms-text-overflow:ellipsis;
+	white-space:nowrap;
+}
+.unieap .gridBorderNone {
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 100%;
+    height: 2px;
+	background: #fff;
+	z-index: 99;
+}
+.unieap .u-grid-content .u-grid-text{
+	display : block;
+	position: relative;
+}
+.unieap .u-grid-header .u-grid-text{
+	line-height:20px;
+}
+.unieap .u-grid-rowbar {
+	border: none;
+	padding: 0px;
+	overflow:hidden;
+	zoom:100%;
+}
+
+.unieap .u-grid-rowbar-table {
+	width: 100%;
+	table-layout:fixed;
+}
+.unieap .u-grid-rowbar-cell{
+	text-align:center;
+	font-size:12px;
+	padding : 0px;
+}
+.unieap .u-grid-rowbar-choice{
+	/*width:22px;*/
+	text-align:center;
+	position: relative;
+}
+/**
+*grid改变列宽时出现拖动条
+*/
+.unieap .u-grid-resize-proxy{
+	overflow : hidden;
+	width : 3px;
+	height : 100%;
+	font-size : 1px;
+	position : absolute;
+	top : 0px;
+	left : 5px;
+	display : none;	
+	z-Index : 20;
+}
+/**
+*定义主排序的样式
+*/
+.unieap .u-grid-sort-primary{
+}
+/**
+*定义主排序的升序样式
+*/
+.unieap .u-grid-sort-primary .u-grid-sort-up{
+	 padding-right:16px;
+	 cursor:default;
+}
+/**
+*定义主排序的降序样式
+*/
+.unieap .u-grid-sort-primary .u-grid-sort-down{
+	 padding-right:16px;
+}
+/**
+*定义次排序的样式
+*/
+.unieap .u-grid-sort-secondary{
+	
+}
+/**
+*定义次排序的升序样式和定义次排序的降序样式
+*/
+.unieap .u-grid-sort-secondary .u-grid-sort-up , .u-grid-sort-down{
+	 padding-right:16px;
+}
+/**
+ * 编辑
+ */
+.unieap .u-grid-value-changed{
+		position:absolute;
+		top:0px;
+		left:0px;
+		width:5px;
+		height:18px;
+		overflow:hidden;
+		font-size:11px;
+}
+
+.unieap .grid-pagecount-wait-img{
+	display: inline-block;
+	*display:inline;
+	zoom:1; 
+	cursor:wait;
+	width: 12px;
+	height:12px;	
+	margin-left:3px;
+}
+/* 隐藏合计行 */
+.u-grid .grid-toolbar-sum {
+    display: none;
+}
+/**
+ * 定义grid的toolbar的样式 base
+ */ 
+ 
+.u-grid-master-toolbar {
+    height: 28px;
+    vertical-align: middle;
+    font: 12px Verdana;
+    padding: 0 7px;
+}
+
+.u-grid-master-toolbar span{
+	font-size:13px;
+}
+.u-xgrid-title-row-operation.u-grid-page.right.isBlock span {
+    line-height: 32px;
+    color: rgba(0,0,0,.85);
+}
+
+
+/**
+ * 定制翻页显示条数
+ */
+.u-grid-cpagesize-left{
+	margin-right:5px;
+}
+
+.u-grid-cpagesize-right{
+	margin-left:5px;
+	margin-right:1px;
+}
+
+
+/**
+ * 定义翻页的样式
+ */ 
+.u-grid-master-toolbar .u-grid-page {
+    height: 100%;
+    line-height: 32px;
+} 
+
+.u-grid-master-toolbar .u-grid-page.left {
+    margin-left: 5px;
+    float: left;
+} 
+
+.u-grid-master-toolbar .u-grid-page.right {
+    float: right;
+    margin:0 5px;
+} 
+
+.u-grid-master-toolbar table {
+    height: 100%;
+} 
+
+
+.u-grid-master-toolbar .u-grid-page .ico {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+
+.u-grid-page.right.isBlock.totalNub span {
+    display: inline-block;
+    height: 28px;
+    line-height: 28px;
+    position: relative;
+    top: 3px;
+}
+/**
+ * 第一页
+ */ 
+ 
+.u-grid-master-toolbar .u-grid-page .u-grid-page-first {
+} 
+
+.u-grid-master-toolbar .u-grid-page .u-grid-page-first-disabled {
+}
+
+/**
+ * 上一页
+ */ 
+ 
+.u-grid-master-toolbar .u-grid-page .u-grid-page-prev {
+} 
+
+.u-grid-master-toolbar .u-grid-page .u-grid-page-prev-disabled {
+}
+
+/**
+ * 下一页
+ */ .u-grid-master-toolbar .u-grid-page .u-grid-page-next {
+}
+.u-grid-master-toolbar .u-grid-page .u-grid-page-next-disabled {
+}
+
+/**
+ * 最后一页
+ */ 
+ 
+.u-grid-master-toolbar .u-grid-page .u-grid-page-last {
+} 
+.u-grid-master-toolbar .u-grid-page .u-grid-page-last-disabled {
+} 
+
+/**
+ * 页码
+ */
+.u-grid-master-toolbar .u-grid-page .u-grid-page-pageNo {
+    text-align: center;
+    width: 23px;
+} 
+
+
+/**
+ * 客户端导出
+ */
+.unieap .export-c {
+} 
+
+/**
+ * 服务端导出
+ */
+.unieap .export-s {
+} 
+
+/**
+ * 导出选中记录
+ */
+.unieap .export-checked {
+} 
+
+/**
+ * 默认客户端导出
+ */
+.unieap .default-export-c {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    top: 3px;
+    left: -2px;
+} 
+/**
+ * 默认服务端导出
+ */
+.unieap .default-export-s {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    top: -4px;
+}
+
+.unieap .default-export-checked {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+
+} 
+
+/**
+ * 分隔符
+ */
+.unieap .sep {
+    width: 2px;
+    height: 18px;
+    overflow: hidden;
+} 
+
+/**
+ * 打印
+ */
+.unieap .u-grid-print {
+    /* background:  url(../images/grid/toolbar/print.gif) no-repeat center;
+	width:24px;
+	display:none;
+	margin-right:5px; */
+	
+}
+
+
+.unieap .u-grid-export{
+	display:none;
+	margin-right:5px;
+}
+.u-grid-export div.u-form-btn-txt {
+    position: relative;
+    left: 5px;
+    top: 1px;
+}
+
+
+
+/**
+*个性化
+*/
+
+.unieap .u-grid-individual{
+	display:none;
+	margin-right:5px;
+}
+.u-grid-individual table{
+    width: 100%;
+}
+
+
+.unieap .individual-reset{
+}
+.unieap .default-individual {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+} 
+
+.unieap .individual .u-grid-individual table{
+    width: 100%;
+}
+/* 三角形 向下箭头 */
+.triangle-down {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 10px solid white;
+}
+.unieap .u-grid-header  .u-grid-cell .u-grid-menu{
+    right: 1px;
+    top: 0px;
+    width: 14px;
+    height: 20px;
+    visibility: hidden;
+}
+
+.unieap .u-grid-header .u-grid-filter-cell{
+	font-weight:bold;
+}
+
+.unieap .u-gird-menu-filtericon{
+}
+.unieap .u-grid-header	.u-grid-header-cell {
+	height:27px;
+	line-height: 27px;
+    width: 100%;
+	display:block;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	position:relative !important;
+} 
+.u-grid-filter-body{
+	height:100%;
+	width:100%;
+	overflow:hidden;
+}
+.unieap .u-grid-filter{
+	text-align:center;
+}
+.unieap .u-grid-filter-table{
+	margin:10px auto 10px auto;
+	width:320px;
+	border:1px #d1d1d1 solid;
+}
+.unieap .u-grid-filter-table select{
+	height:21px;
+	width:100%;
+	font-size:12px;
+}
+.unieap .u-grid-filter-table .u-menu-item-separator{
+	width:100%;
+	height:1px;
+	display:block;
+}
+
+.unieap .u-grid-filter-table .u-grid-filter-cancel {
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    margin-bottom: 2px;
+	cursor:pointer;
+}
+
+.unieap .u-grid-filter-table .u-grid-filter-ok {
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    margin-bottom: 2px;
+	cursor:pointer;
+}
+
+.unieap .u-grid-filter-table .u-grid-filter-del{
+	display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+/**
+ * 个性化功能 base
+ */
+.unieap .u-grid-custom-div{
+	width:100%;
+	height:100%;
+	background: #eee;
+}
+.unieap .u-grid-custom-up{
+	border:1px solid #919292;
+	padding:0px 10px 0px 10px !important;
+	background:#fff url("../images/form/button-bg.gif") repeat-x top left;
+	margin-bottom:3px;
+	margin-left:5px;
+	height:21px;
+	white-space: normal;
+	position: absolute;
+	width:60px;
+	right:10px;
+	top:25px;
+}
+.unieap .u-grid-custom-down{
+	border:1px solid #919292;
+	padding:0px 10px 0px 10px !important;
+	background:#fff url("../images/form/button-bg.gif") repeat-x top left;
+	margin-bottom:3px;
+	margin-left:5px;
+	height:21px;
+	white-space: normal;
+	position: absolute;
+	width:60px;
+	top:50px;
+	right:10px;
+}
+.unieap .u-grid-custom-save{
+	border:1px solid #919292;
+	padding:0px 10px 0px 10px !important;
+	background:#fff url("../images/form/button-bg.gif") repeat-x top left;
+	margin-bottom:3px;
+	margin-left:5px;
+	height:21px;
+	white-space: normal;
+	position: absolute;
+	width:60px;
+	bottom:10px;
+	right:75px;
+}
+.unieap .u-grid-custom-apply{
+	border:1px solid #919292;
+	padding:0px 10px 0px 10px !important;
+	background:#fff url("../images/form/button-bg.gif") repeat-x top left;
+	margin-bottom:3px;
+	margin-left:5px;
+	height:21px;
+	white-space: normal;
+	position: absolute;
+	width:60px;
+	bottom:10px;
+	right:10px;
+}
+/**
+ * 分组功能 base
+ */
+.unieap .u-grid-group{
+	zoom: 100%;
+}
+.unieap .u-grid-group-minus{
+	width:16px;
+	height: 16px;
+	background-position:center;
+	background-repeat:no-repeat;
+}
+.unieap .u-grid-group-plus{
+	width: 16px;
+	height: 16px;
+	background-position:center;
+	background-repeat:no-repeat;
+}
+.unieap .u-grid-group-font{
+}
+.unieap .u-grid-group-node{
+	width:100%;
+	position:relative;
+	padding-left: 2px;
+	height: 23px;
+	display: inline-block;
+}
+.dj_iequirks .unieap .u-grid-group-node{
+	height: 23px;
+}
+.unieap .u-grid-group-btn{
+	position: absolute;
+	right: 2px;
+	top: 2px;
+	width: 19px;
+	height: 19px;
+	overflow: hidden;
+	cursor: default;
+}
+.unieap .u-grid-group-btnNormal{
+}
+.unieap .u-grid-group-dragProxy{
+	position: absolute;
+	cursor: move;
+	padding-left: 5px;
+}
+.unieap .u-grid-group-arrow{
+	width: 9px;
+	height: 9px;
+	position: absolute;
+	overflow: hidden;
+	display: none;
+}
+.unieap .u-grid-group-arrow-top{
+	top: 0px;
+}
+.unieap .u-grid-group-arrow-bottom{
+	bottom: 0px;
+}
+.unieap .u-grid-group-cell{
+	height: 20px;
+	margin: 1px 0px 0px 0px;
+	font-family: Verdana;
+	color: rgba(0,0,0,.65);
+	width: 90px;
+	cursor: default;
+	text-align: center;
+	display: inline-block;
+	float: left;
+	line-height: 20px;
+	position: relative;
+	overflow: hidden;
+	padding: 0 7px;
+	font-size: 12px;
+	border-radius: 4px;
+}
+.dj_iequirks .unieap .u-grid-group-cell{
+	height: 21px;
+	line-height: 21px;
+}
+.unieap .u-grid-group-cellremove{
+	position: absolute;
+	width: 9px;
+	height: 9px;
+	overflow: hidden;
+	top: 4px;
+	right: 2px;
+	cursor: pointer;
+}
+.unieap .u-grid-group-sep{
+	height: 20px;
+	width: 10px;
+	background: url(../images/grid/group/line.gif) no-repeat;
+	background-position: center;
+	margin: 0px 1px 6px 1px;
+	overflow: hidden;
+	display: inline-block;
+	float: left;
+}
+
+.unieap .u-grid-rowbar-detail{
+	width:22px;
+}
+
+.unieap .u-grid-detail-plus{
+	width:16px;
+	height : 16px;
+	background-position:center;
+	background-repeat:no-repeat;
+	cursor:pointer;
+}
+.unieap .u-grid-detail-minus{
+	width:16px;
+	height : 16px;
+	background-position:center;
+	cursor:pointer;
+}
+
+.unieap .u-grid-row-detail-table{
+	font-size: 12px;
+	table-layout: fixed;
+	width:100%;
+	position:relative;
+}
+/**
+ * 树表 base
+ */
+
+.unieap .u-grid-treegrid-celltable{
+	table-layout:fixed;
+	float:left;
+	height:100%;
+	width:100%;
+	overflow:hidden;
+	margin:0px;
+}
+.unieap .u-grid-treegrid-celltable td{ 
+	text-overflow:ellipsis;
+	overflow : hidden;
+}
+.unieap .u-grid-treegrid-minus{
+	width:16px;
+	height: 16px;
+	background-position:center;
+	background-repeat:no-repeat;
+	float:left;
+}
+.unieap .u-grid-treegrid-plus{
+	width: 16px;
+	height: 16px;
+	background-position:center;
+	background-repeat:no-repeat;
+	float:left;
+}
+.unieap .u-grid-treegrid-closedIcon-default{
+	width: 16px;
+	height: 16px;
+	overflow:hidden;
+}
+.unieap .u-grid-treegrid-openedIcon-default{
+	width: 16px;
+	height: 16px;
+	overflow: hidden;
+}
+.unieap .u-grid-treegrid-leafIcon-default{
+	width: 16px;
+	height: 16px;
+	overflow: hidden;
+}
+/**
+ * 合并单元格 base
+ */
+.unieap .u-grid-unitedLayer{
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:100%;
+	height:100%;
+	z-index:3;
+	visibility:hidden;
+}
+
+.unieap .u-grid-unitedLayout{
+	height:100%;
+}
+.unieap .u-grid-unitedCellLayer{
+	position:relative;
+	width:100%;
+	height:100%;
+	font-size :12px;
+	visibility:visible;
+}
+.unieap .u-grid-unitedCellLayer-container{
+	position:relative;
+	top:0;
+	left:0;
+	height:0px;
+	width:100%;
+	z-index:3;
+}
+.unieap .u-grid-unitedCell{
+	margin-left: -5px;
+	position:absolute;
+	width:100%;
+	opacity:100;
+}
+
+.unieap .u-grid-unite-cell{
+	width:100%;
+	position : absolute;
+	overflow:hidden;
+	left :0px;
+	zoom:100%;
+
+}
+
+
+.unieap .u-grid-unitedCell-inner{
+	font-size:12px;
+	font-weight : normal;
+	overflow : hidden;
+	text-overflow:ellipsis;
+}
+.unieap .u-grid-united-group{
+	zoom: 100%;
+}
+.unieap .u-titlepane-widget{
+	width:auto;
+}
+
+/**
+ * @summary:
+ * 		titlepane组件的title部分的样式
+ */
+.unieap .u-titlepane-title {
+    background-repeat:repeat;
+    height: 24px;
+	overflow:hidden;
+	border:1px #99BBE8 solid;
+	border-top:0px;
+	border-bottom:0px;
+	text-align:center;
+	cursor:pointer;
+	zoom:1;
+} 
+
+/**
+ * @summary:
+ * 		titlepane组件的title部分标题的样式
+ */
+.unieap .u-titlepane-titlenode {
+	display:block;
+	float:left;
+	margin:1px 5px 0px 0px;
+	line-height:20px;
+} 
+
+/**
+ * @summary:
+ * 		titlepane组件的title部分表示展开收缩的标志位样式
+ * 		"+"或者"-"
+ */
+.unieap .u-titlepane-arrownode {
+	/*margin:1px 5px 0px 0px;*/
+	width:20px;
+	display:block;
+	float:left;
+	line-height:20px;
+} 
+
+/**
+ * @summary:
+ * 		titlepane组件的title部分右上角的button按钮域的样式
+ */
+.unieap .u-titlepane-buttonfield {
+    float: right;
+    margin-right: 5px;
+}
+
+/**
+ * @summary:
+ * 		titlepane组件的title部分右上角的button按钮域的样式
+ */ 
+.unieap .u-titlepane-buttonfield button{
+	/*margin-left: 5px;*/
+}
+
+/**
+ * @summary:
+ * 		titlepane组件下拉部分的外层样式
+ */
+.unieap .u-titlepane-content-outer {
+	/** 增加背景颜色设置 **/
+	border-top:0px;
+	padding:1px 2px 2px 2px;
+	zoom:1;
+	position:relative; /** 针对IE7情况 **/
+} 
+.unieap .u-titlepane-content-wipe{
+	zoom:1;
+}
+
+/**
+ * @summary:
+ * 		titlepane组件下拉部分的内层样式
+ */
+.unieap .u-titlepane-content-inner {
+	overflow:auto;
+	width:auto;
+	/**修正ie6下当titlepane的内部宽度大于实际宽度时,不显示水平滚动条的bug */
+	_width:100%;
+	position:relative;/*避免的内部的position:relative div无法拖动*/
+}
+
+.unieap .dijitTabPane .loading,
+.unieap .u-titlepane-content-inner .loading {
+	height:40px;
+	background-repeat:no-repeat;
+	padding:10px 0px 0px 32px;
+}
+
+
+.dojoxResizeHandle {
+    float: right;
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    width: 13px;
+    height: 13px;
+    z-index: 20;
+    line-height: 0px;
+} 
+
+.dojoxResizeNW {
+    cursor: nw-resize;
+} 
+
+.dojoxResizeNE {
+    cursor: ne-resize;
+} 
+.dojoxResizeW {
+    cursor: w-resize;
+} 
+.dojoxResizeN {
+    cursor: n-resize;
+} 
+.dojoxResizeHandleClone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px dashed #666;
+    z-index: 999;
+}
+
+.unieap .u-titlepane-moveHandle{
+	margin:2px 4px 0px 4px;
+	width:16px;
+	height:16px; 
+	float:left;
+	cursor:move;
+}
+
+.unieap .u-contentpane-iframe{
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+/*-------Container-------*/
+.unieap .tabContainer {
+	overflow:hidden;
+	position:relative;
+}
+
+.unieap .tabContainer-nest {
+	width:100%;
+	height:100%;
+	overflow:hidden;
+	zoom:1;
+}
+
+.unieap .tab-scrolling-container {
+	position:relative;
+	overflow:hidden;
+}
+
+.unieap .tab-scrolling{
+	position:absolute;
+	_height:100%;
+}
+
+.unieap .tabPaneWrapper {
+	margin: 0;
+	padding: 0;
+	z-index:2;
+	position:relative;
+}
+
+.tabSpacer {
+}
+
+.unieap .tab {
+	border:1px solid #ccc;
+	line-height:normal;
+	margin-right:4px;
+	padding:0px;
+	cursor:pointer;
+	z-index:3;
+	white-space:nowrap;
+	display:block;
+	text-decoration: none;
+}
+
+.unieap .tabChecked {
+	background-image:none;
+}
+
+.unieap .tab .unieapClosable .closeImage {
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+}
+
+/*Tab a标签*/
+.unieap a.u-a-tab{
+}
+	
+.unieap a:hover.u-a-tab{
+	
+}
+
+
+.unieap .tab-scrolling-container .tabward{
+	position: absolute;
+	z-index:100;
+	cursor:pointer;
+}
+.unieap .tab-scrolling-container .eapMenu{
+	background-repeat:no-repeat;
+	background-position:center;
+	/*TODO*/
+}
+
+/*------- top -------*/
+.unieap .tabContainerTop .tab-scrolling-containerTop {
+	height:23px;
+	_height:24px;
+
+}
+
+.unieap .tabContainerTop .tabPaneWrapperTop{
+	border-top:none;
+}
+
+.unieap .tabContainerTop-tabs .tab{
+	height:21px;
+}
+
+.unieap .tabContainerTop-tabs .tabChecked {
+	border-bottom-color:white;
+}
+
+.unieap a:hover.u-a-tabTop{
+	border-bottom-color:white;
+}
+
+.unieap .tabContainerTop .eapLeftTop {
+	top:0px;
+	left:0px;
+	width:18px;
+	height:23px;
+}
+.unieap .tabContainerTop .eapRightTop {
+	top:0px;
+	right:36px;
+	width:18px;
+	height:23px;			
+}
+.unieap .tabContainerTop .eapMenuTop {
+	top:0px;
+	right:0px;
+	width:18px;
+	height:23px;
+}
+
+.dj_ie6 .unieap .tabContainerTop .eapMenuTop ,
+.dj_ie6 .unieap .tabContainerTop .eapRightTop {
+	margin-right:-1px;
+}
+
+
+.unieap .tabContainerTop .tabSpacerTop,
+.unieap .tabContainerBottom .tabSpacerBottom {
+	height:1px;
+}
+
+.unieap .tabContainerTop-tabs .tab,
+.unieap .tabContainerBottom-tabs .tab {
+	display:inline-block;
+	vertical-align:middle;
+}
+
+.unieap .tabContainerBottom-tabs .tabInnerDiv,
+.unieap .tabContainerTop-tabs .tabInnerDiv {
+	line-height:20px;
+	padding: 0px 5px 0px 5px ;
+}
+/*解决IE6下，存在关闭图片时，tab button向下串位*/
+.dj_ie6 .unieap .tabContainerBottom-tabs .unieapClosable,
+.dj_ie6 .unieap .tabContainerTop-tabs .unieapClosable {
+	margin-top:3px;
+}
+
+.unieap .tabContainerTop-tabs .tab .unieapClosable .closeImage,
+.unieap .tabContainerBottom-tabs .tab .unieapClosable .closeImage{
+	margin-left:5px;
+}
+
+
+/*------- bottom -------*/
+.unieap .tabContainerBottom .tab-scrolling-containerBottom {
+	margin-top: -1px;
+	height:23px;
+	border-left:1px solid #99bbe8;
+	border-right:1px solid #99bbe8;
+}
+
+.unieap .tabContainerBottom .tabPaneWrapperBottom{
+	border-bottom:none;
+}
+
+.unieap .tabContainerBottom-tabs .tab{
+	height:21px;
+}
+
+.unieap .tabContainerBottom-tabs .tabChecked {
+	border-top-color:white;
+}
+
+.unieap a:hover.u-a-tabBottom{
+	border-top-color:white;
+}
+
+.unieap .tabContainerBottom .eapLeftBottom {
+	bottom:0px;
+	left:0px;
+	width:18px;
+	height:23px;
+}
+
+.unieap .tabContainerBottom .eapRightBottom {
+	bottom:0px;
+	right:18px;
+	width:18px;
+	height:23px;			
+}
+.unieap .tabContainerBottom .eapMenuBottom {
+	bottom:0px;
+	right:0px;
+	width:18px;
+	height:23px;
+}
+
+.dj_ie6 .unieap .tabContainerBottom .eapMenuBottom ,
+.dj_ie6 .unieap .tabContainerBottom .eapRightBottom {
+	margin-right:-1px;
+}
+/*------- left -------*/
+.unieap .tabContainerLeft .tab-scrolling-containerLeft {
+	margin-right: -1px;
+	width:23px;
+	height:100%;
+	border-top:1px solid #99bbe8;
+	border-bottom:1px solid #99bbe8;
+	float:left;
+}
+
+.unieap .tabContainerLeft .tabPaneWrapperLeft{
+	border-left:none;
+	height:100%;
+}
+
+.unieap .tabContainerLeft .tabSpacerLeft {
+	width:1px;
+	height:100%;
+	float:left;
+}
+
+.unieap .tabContainerLeft-tabs .tab{
+	width:21px;
+}
+
+.unieap .tabContainerLeft-tabs .tabChecked {
+	border-right-color:white;
+}
+
+.unieap a:hover.u-a-tabLeft{
+	border-right-color:white;
+}
+
+.unieap .tabContainerLeft  .eapUpLeft{
+	top:0px;
+	left:0px;
+	width:23px;
+	height:18px;
+	background-position:top;
+}
+.unieap .tabContainerLeft .eapDownLeft{
+	bottom:18px;
+	left:0px;
+	width:23px;
+	height:18px;
+	background-position:bottom;
+}
+.unieap .tabContainerLeft .eapMenuLeft{
+	left:0px;
+	bottom:0px;
+	width:23px;
+	height:18px;
+}
+
+/*调整tab Button之间的margin*/
+.unieap .tabContainerLeft-tabs .tab,
+.unieap .tabContainerRight-tabs .tab {
+	margin-right:0px;
+	margin-bottom:4px;
+}
+
+.unieap .tabContainerLeft-tabs .tabInnerDiv,
+.unieap .tabContainerRight-tabs .tabInnerDiv {
+	padding:  5px 0px 5px 0px;
+}
+.unieap .tabContainerLeft-tabs .tabInnerDiv .tabLabel,
+.unieap .tabContainerRight-tabs .tabInnerDiv .tabLabel{
+	text-align:center;
+	writing-mode:tb-rl;
+}
+
+.unieap .tabContainerLeft-tabs .tab .unieapClosable .closeImage,
+.unieap .tabContainerRight-tabs .tab .unieapClosable .closeImage {
+	display:block;
+	margin-left:2px;
+}
+
+
+/*------- right -------*/
+.unieap .tabContainerRight .tab-scrolling-containerRight {
+	margin-left: -1px;
+	width:23px;
+	height:100%;
+	border-top:1px solid #99bbe8;
+	border-bottom:1px solid #99bbe8;
+	float:right;
+}
+
+.unieap .tabContainerRight .tabPaneWrapperRight{
+	border-right:none;
+	height:100%;
+}
+
+.unieap .tabContainerRight .tabSpacerRight {
+	width:1px;
+	height:100%;
+	float:right;
+}
+
+.unieap .tabContainerRight-tabs .tab{
+	width:21px;
+}
+
+.unieap .tabContainerRight-tabs .tabChecked {
+	border-left-color:white;
+}
+
+.unieap a:hover.u-a-tabRight{
+	border-left-color:white;
+}
+
+.unieap .tabContainerRight  .eapUpRight {
+	top:0px;
+	width:23px;
+	height:18px;
+	left:0px;
+	background-position:top;
+}
+.unieap .tabContainerRight .eapDownRight {
+	bottom:18px;
+	left:0px;
+	width:23px;
+	height:18px;
+	background-position:bottom;
+}
+.unieap .tabContainerRight .eapMenuRight {
+	right:0px;
+	bottom:0px;
+	width:23px;
+	height:18px;
+}
+
+
+.unieapHidden {
+	display: none !important;
+}
+
+.unieapVisible {
+	display: block !important;
+	overflow: visible !important;
+}
+
+.unieap .tabContainerTop .tab-scrolling {
+	/*border-bottom: 1px solid #D8D8D8;*/
+}
+.unieap .adaptivecontainer{
+	overflow:hidden;
+	position:relative;
+}
+
+.unieap .adaptivepane{
+	position:relative;
+	overflow:hidden;
+}
+
+.unieap .borderContainer {
+	overflow:hidden;
+	position:relative;
+}
+
+.unieap .borderPaneOuter {
+	width:100%;
+	height:100%;
+	overflow:hidden;
+	position:relative; /*用于拖动条的定位*/
+	-moz-user-select:-moz-none;/*解决在FF下，DIV被涂上的问题*/
+}
+/*面板*/
+.unieap .borderPane {
+	border:1px solid #99BBE8;
+	overflow:hidden; /*FF下  splitLine float后，borderPane仍然100% width*/
+	position:relative;
+}
+
+.unieap .leftBorderPane {
+	float:left;
+}
+/*解决IE6下  float的DIV和外层DIV的白边儿*/
+.dj_ie6 .unieap .leftBorderPane {
+	margin-right:-3px;
+}
+
+.unieap .rightBorderPane {
+	float:right;
+}
+
+.dj_ie6 .unieap .rightBorderPane {
+	margin-left:-3px;	
+}
+
+/*垂直分割条*/
+.unieap .u-border-splitterV {
+	/*cursor:w-resize;*/
+	border:none;
+	width:5px;
+	height:100%;
+}
+
+.dj_ie6 .unieap .u-border-splitterV-left {
+	margin-left:-3px;	
+}
+
+.dj_ie6 .unieap .u-border-splitterV-right {
+	margin-right:-3px;	
+}
+
+/*水平分割条*/
+.unieap .u-border-splitterH {
+	/*cursor:n-resize;*/
+	border:none;
+	height:5px;
+}
+
+/*标题和收缩条*/
+.unieap .titleNode {
+    height: 23px;
+	margin-top:-1px;
+	overflow : hidden;
+}
+
+.unieap .u-border-titleText {
+	margin:1px 0px 0px 5px;
+	height:21px;
+	overflow:hidden;
+}
+
+.unieap .u-border-titleText-Inner {
+	width:100%;
+	text-overflow:ellipsis;
+	margin-top:5px;
+	overflow:hidden;
+	word-break:keep-all;
+}
+
+.unieap .u-border-titleButton,
+.unieap .u-border-wrapButton{
+	width:16px;
+	height:16px;
+	cursor:pointer;
+	display:block;
+	float:right;
+	margin:5px 0px 0px 3px;
+}
+
+.unieap .u-border-titleButton-top,
+.unieap .u-border-wrapButton-bottom {
+}
+
+.unieap .u-border-titleButton-bottom,
+.unieap .u-border-wrapButton-top {
+}
+
+.unieap .u-border-titleButton-left,
+.unieap .u-border-wrapButton-right {
+}
+
+.unieap .u-border-titleButton-right,
+.unieap .u-border-wrapButton-left {
+}
+
+/* 收缩条*/
+/*垂直收缩条*/
+.unieap .u-border-wrapNodeV {
+	width:23px;
+	overflow:hidden;
+	position:relative;
+}
+/*水平收缩条*/
+.unieap .u-border-wrapNodeH {
+	height:23px;
+}
+
+.unieap a:hover.u-border-a {
+}
+
+/*拖动条*/
+.unieap .u-border-moveSplitLine {
+   	filter:Alpha(Opacity="50");
+   	z-index:10001;
+   	overflow:hidden;
+   	position:absolute;
+  	opacity:.50;
+}
+
+
+.unieap .hbox-outer{
+	overflow:hidden;
+	zoom:1;
+}
+
+.unieap .hbox-inner{
+	overflow:hidden;
+	position:relative;
+	left:0;
+	top:0;
+	zoom:1;
+	height:100%;
+}
+
+
+.unieap .vbox-outer{
+	overflow:hidden;
+	zoom:1;
+}
+
+.unieap .vbox-inner{
+	overflow:hidden;
+	position:relative;
+	left:0;
+	top:0;
+	zoom:1;
+	height:100%;
+}
+.unieap .stackcontainer{
+	overflow:hidden;
+}
+
+/**隐藏StackContainer下的页面*/
+.unieap .stackpage-hidden{
+	display:none !important;
+}
+
+/**显示StackContainer下的页面*/
+.unieap .stackpage-visible{
+	display:block !important;
+}
+.unieap .accordionContainer {
+	border: none;
+}
+
+.unieap .accordioninnerContainer { /* gray, for closed pane */
+	-webkit-transition-property: background-color, border;
+	-moz-transition-property: background-color, border;
+	transition-property: background-color, border;
+	-webkit-transition-duration: 0.3s;
+	-moz-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+	-webkit-transition-timing-function: linear;
+	-moz-transition-timing-function: linear;
+	transition-timing-function: linear;
+}
+
+.unieap .accordionTitle {
+	background-position: 0 0;
+	background-repeat: repeat-x;
+}
+
+.unieap .accordionTitleHover {
+	
+}
+
+.dj_ie6 .unieap .accordionTitle {
+	
+}
+
+.unieap .accordionContainer .accordionChildWrapper {
+	/* this extends the blue trim styling of the title bar to wrapping around the node.
+	 * done by setting margin
+	 */
+	background-color:#FFFFFF;
+}
+
+.unieap .accordionContainer .accordionContainer-child {
+	/* this is affecting the child widget itself */
+	
+}
+
+.unieap .accordioninnerContainerActive .accordionTitle { /*
+	background-position: 0 -136px;
+	color: #000000;
+	*/
+	
+}
+
+.unieap .accordioninnerContainerSelected .accordionTitle { /*
+	color: #000000;
+	background-position: 0 0;
+	*/
+	/* avoid effect when clicking the title of the open pane */
+	
+}
+/* Hovering open or closed pane */
+.unieap .accordioninnerContainerHover .accordionTitle {
+	/* both open and closed */
+	
+}
+
+.accordionTitle .arrowTextUp,.accordionTitle .arrowTextDown {
+	display: none;
+}
+
+.unieap .accordionTitle .accordionArrow {
+	float:right;
+}
+
+.unieap .accordionTitleHover .accordionArrow {
+	float:right;
+}
+
+.unieap .accordionTitleSelected .accordionArrow {
+	float:right;
+}
+.unieap .dijitTreeContainer  table {
+}
+
+.unieap .treeCheckBoxReadOnly {
+}
+
+.unieap .treeLabelDisabled {
+	text-decoration: line-through;
+}
+
+.unieap .treeLabelReadOnly {
+	text-decoration: line-through;
+}
+/* Tree */
+.unieap .treeRenderNode {
+	line-height: 19px;
+	display: -moz-inline-box;
+	display: inline-block;
+	vertical-align: middle;
+	width: auto;
+	line-height: 22px;
+	height: 22px;
+}
+
+.unieap .u-popupcontainer >.dijitTreeContainer {
+	padding: 0 12px;
+}
+
+.unieap .dijitTree {
+	margin-left: 0px;
+	margin-top: 0px;
+}
+
+.unieap .dijitTreeNode {
+	cursor: pointer;
+	background-position: top left;
+	background-repeat: repeat-y;
+	margin-left: 20px;
+}
+
+/* left vertical line (grid) for all nodes */
+.unieap .dijitTreeIsLast {
+}
+
+.unieap .dijitTreeIsRoot {
+	margin-left: 0;
+	background-image: none;
+}
+
+.unieap .dijitTreeExpando {
+	width: 16px;
+	height: 16px;
+	line-height: 19px;
+	background-repeat: no-repeat;
+}
+
+.unieap .treeRootNode {
+	
+}
+
+.unieap .dijitTreeContent {
+	cursor: pointer;
+}
+
+.unieap .dijitTreeExpand {
+	width: 16px;
+	height: 16px;
+	background-repeat: no-repeat;
+}
+
+/* same style as IE selection */
+.unieap .dijitTreeNodeEmphasized {
+}
+
+/* don't use :focus due to opera and IE's lack of support on div's */
+.unieap .dijitTreeLabel {
+	white-space: nowrap;
+	padding: 0px;
+	padding-left: 6px;
+	margin: 0px;
+	line-height: 18px;
+	overflow: hidden;
+	zoom: 100%;
+}
+
+.unieap .dijitTreeLabelFocused { /*
+	background:url(../images/tree/treebg-on.gif);
+	background-position:0px 19px;
+	color:#959595;
+	border-color:#bfd8d7;
+	border-left:solid #bfd8d7 1px;
+	border-right:solid #bfd8d7 1px;
+	hidefocus:true;	
+	*/
+}
+
+.unieap .unieapTreeMouseOver { /*
+	background:url(../images/tree/treebg-hover.gif);
+	background-position:0px 19px;
+	border-left: solid #ccd5da 1px;
+	border-right:solid #ccd5da  1px;
+	*/
+}
+
+.unieap .dijitTreeExpandoOpened {
+	width: 16px;
+}
+
+.unieap .dijitTreeExpandoClosed {
+	width: 16px;
+}
+
+.unieap .dijitTreeExpandoLeaf {
+	width: 16px;
+}
+
+.unieap .dijitTreeExpandoLoading {
+	width: 16px;
+}
+
+.unieap .dijitTreeIcon {
+	width: 16px !important;
+	height: 16px;
+}
+
+.unieap .dijitFolderOpened {
+	width: 16px;
+}
+
+.unieap .dijitFolderClosed {
+	width: 16px;
+}
+
+.unieap .dijitLeaf {
+	width: 16px;
+}
+
+.dijitCheckBox { /* inside a toggle button */
+	/* checkbox sprite image */
+	background-repeat: no-repeat;
+	width: 16px;
+	height: 16px;
+	margin: 0;
+	padding: 0;
+}
+
+.dijitCheckBox {
+	padding: 0;
+	border: 0;
+	width: 16px;
+	height: 16px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+
+.dijitCheckBox INPUT {
+	margin: 0;
+	padding: 0;
+	display: block;
+}
+
+.dijitCheckBoxInput {
+	opacity: 0.01;
+}
+
+.dj_ie .dijitCheckBoxInput {
+	filter: alpha(opacity = 0);
+}
+
+.dijitCheckBox {
+	background-position: -16px;
+}
+
+.dijitCheckBoxChecked {
+	/* background-position: 0px; */
+}
+
+.dijitCheckBoxDisabled {
+	/* background-position: -48px; */
+}
+
+.dijitCheckBoxCheckedDisabled {
+	/* background-position: -32px; */
+}
+.dojoDndAvatarHeader td {
+	padding-left: 20px;
+	padding-right: 4px;
+}
+
+.dojoDndMove .dojoDndAvatarHeader {
+	background-repeat: no-repeat;
+}
+
+.dojoDndCopy .dojoDndAvatarHeader {
+	background-repeat: no-repeat;
+}
+
+.dojoDndMove .dojoDndAvatarCanDrop .dojoDndAvatarHeader {
+	background-repeat: no-repeat;
+}
+
+.dojoDndCopy .dojoDndAvatarCanDrop .dojoDndAvatarHeader {
+	background-repeat: no-repeat;
+}
+.dojoDndItem { 
+	padding:3px; 
+}
+
+.dojoDndItemOver {
+	cursor:pointer;
+}
+.dojoDndItemDragingOver {
+	cursor:pointer;
+	BORDER-BOTTOM-STYLE: solid;
+	border-width:1px thin;
+}
+
+.unieapTreeItemOver {
+}
+.dojoDndItemSelected {
+}
+
+.dojoDndItemAnchor {
+}
+
+.dojoDndItemOver .dojoDndItemSelected {
+}
+
+.dojoDndItemOver .dojoDndItemAnchor {
+}
+
+.dojoDndItemBefore {
+	border-top: 2px solid #369;
+}
+
+.dojoDndItemAfter {
+	border-bottom: 2px solid #369;
+}
+
+.dojoDndAvatar {
+	border:1px solid #dcdcdc;
+	-moz-border-radius:8pt 8pt;
+	radius:8pt;
+}
+	
+.dojoDndAvatarHeader {
+}
+
+.dojoDndAvatarItem {
+	border-bottom:1px solid #666;
+}
+.unieap .u-xgrid {
+	position: relative;
+}
+
+.unieap .u-xgrid-headers {
+	position: relative;
+	overflow: hidden;
+	border-top: 1px solid #dadada;
+}
+
+.unieap .u-xgrid-header {
+	height: 100%;
+	position: absolute;
+	top: 0;
+
+}
+
+.unieap .u-xgrid-headerContent {
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+}
+
+.unieap .u-xgrid-views {
+	position: relative;
+	overflow: hidden;
+	border-bottom: 1px solid #dadada;
+}
+
+.unieap .u-xgrid-view {
+	position: absolute;
+	top: 0;
+}
+
+.unieap .u-xgrid-viewContent {
+	overflow: hidden;
+	position: relative;
+}
+.unieap .u-xgrid-scrollContent {
+	overflow: hidden;
+	position: relative;
+}
+.unieap .u-xgrid-yscroller {
+	z-index: 1;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 17px;
+	display: none;
+
+}
+
+.unieap .y-scroller-up {
+	position: absolute;
+	top: 0;
+	right: 1px;
+	width: 16px;
+	height: 16px;
+
+}
+
+.unieap .y-scroller-down {
+	position: absolute;
+	bottom: 0px;
+	right: 1px;
+	width: 16px;
+	height: 16px;
+
+}
+
+.unieap .y-scroller-handle {
+	position: absolute;
+	top: 16px;
+	width: 17px;
+	right: 0px!important;
+	right: 0.5px;
+	height: 16px;
+
+}
+
+.unieap .y-scroller-handle-top {
+	width: 17px;
+	height: 3px;
+	top: 0;
+	overflow: hidden;
+	position: absolute;
+
+}
+
+.unieap .y-scroller-handle-middle {
+	width: 17px;
+	height: 9px;
+	top: 50%;
+	overflow: hidden;
+	margin-top: -4.5px;
+	position: absolute;
+
+}
+
+.unieap .y-scroller-handle-bottom {
+	width: 17px;
+	height: 3px;
+	overflow: hidden;
+	bottom: 0;
+	position: absolute;
+
+}
+
+.unieap .u-xgrid-xscroller {
+	z-index: 1;
+	overflow: hidden;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 17px;
+
+}
+
+.unieap .x-scroller-up {
+	position: absolute;
+	left: 0;
+	bottom: 1px!important;
+	bottom: 0.5px;
+	width: 16px;
+	height: 16px;
+
+}
+
+.unieap .x-scroller-down {
+	position: absolute;
+	right: 0;
+	bottom: 1px!important;
+	bottom: 0.5px;
+	width: 16px;
+	height: 16px;
+
+}
+
+.unieap .x-scroller-handle {
+	position: absolute;
+	left: 16px;
+	width: 16px;
+	height: 17px;
+
+}
+
+.unieap .x-scroller-handle-east {
+	width: 3px;
+	height: 15px;
+	right: 0;
+	bottom: 1px!important;
+	bottom: 0.5px;
+	position: absolute;
+
+}
+
+.unieap .x-scroller-handle-middle {
+	width: 9px;
+	height: 15px;
+	left: 50%;
+	bottom: 1px!important;
+	bottom: 0px;
+	margin-left: -4.5px;
+	position: absolute;
+
+}
+
+/** 数字列标题默认居中对齐 */
+.unieap th.u-xgrid-text2-number {
+	text-align: center;
+	
+}
+
+.unieap th.u-xgrid-text2-number .u-xgrid-htext{
+	padding-right:9px;
+}
+/** 数字列内容默认居右对齐 */
+.unieap td.u-xgrid-text2-number {
+	text-align: right;
+	margin-right: 9px;
+}
+.unieap th.u-xgrid-MulTitle{
+	text-align: center;
+	border-bottom:none;
+}
+
+.unieap .x-scroller-handle-west {
+	width: 3px;
+	height: 15px;
+	bottom: 1px!important;
+	bottom: 0.5px;
+	left: 0;
+	position: absolute;
+
+}
+
+.unieap .u-xgrid-table {
+	table-layout: fixed;
+	
+}
+
+.unieap .u-xgrid-cell {
+	height: 20px;
+	line-height: 21px;
+	text-indent: 5px;
+	overflow: hidden;
+	white-space: nowrap;
+    font-weight: normal;
+    text-overflow: ellipsis;
+}
+
+.unieap .u-xgrid-hcell {
+	height: 20px;
+	/*line-height: 21px;*/
+	line-height:20px;
+	text-indent: 5px;
+	font-weight: 600;
+	border-bottom: 1px solid #e8e8e8;
+	border-right: 1px solid #e8e8e8;
+	text-align: center;
+}
+
+.unieap .u-xgrid-htext{
+	white-space: nowrap;
+	overflow:hidden;
+	position:relative;
+}
+
+.unieap .u-xgrid-odd {
+	/*background-color: #f8f8f8;*/
+}
+
+.header-corner {
+	width: 17px;
+	background-color: #eee;
+	right: 0;
+	position: absolute;
+}
+
+.content-corner {
+	width: 17px;
+	height: 17px;
+	background-color: #eee;
+	right: 0px;
+	bottom: 0px;
+	position: absolute;
+}
+.content-loading {
+	width: 140px;
+	height: 20px;
+	left: 35%;
+	position: absolute;
+}
+
+.content-loading-text {
+	text-align:left;
+	position: absolute;
+	display: inline-block;
+	padding:2px 0px 10px 25px;
+	font-size:13px;
+	font-family : tahoma, arial, helvetica, sans-serif;
+	font-style :italic;
+	color : #A9A9A9;
+	top: 0px;
+}
+
+.unieap .u-xgrid-rowbar-table {
+	table-layout: fixed;
+	position: absolute;
+	border-right: 1px solid #dadada;
+}
+
+.unieap .u-xgrid-rowbar-table tr {
+
+}
+
+.unieap .u-xgrid-rowbar {
+	height: 20px;
+	line-height: 21px;
+	overflow: hidden;
+	white-space: nowrap;
+	border-bottom: 1px solid #dadada;
+	font-size: 12px;
+    font-weight: normal;
+    text-align:center;
+}
+
+.unieap .u-xgrid-rowbar-cell{
+	/*font-size:12px;*/
+	padding : 0px;
+}
+
+.unieap .u-xgrid-rowbar-choice{
+	height: 20px;
+	line-height: 21px;
+	overflow: hidden;
+	white-space: nowrap;
+	/*border-bottom: 1px solid #dadada;*/
+	font-size: 12px;
+    font-weight: normal;
+    text-align:center;
+}
+
+/**
+*xgrid改变列宽时出现拖动条
+*/
+.unieap .u-xgrid-resize-proxy{
+	overflow : hidden;
+	width : 3px;
+	height : 100%;
+	border-left : 1px solid #000000;
+	font-size : 1px;
+	position : absolute;
+	top : 0px;
+	left : 5px;
+	display : none;	
+	z-Index : 5;
+}
+
+
+.unieap .u-xgrid-adjust-proxy{
+	position: absolute;
+	padding-left: 23px;
+	padding-right: 5px;
+	height: 25px;
+	line-height: 25px;
+	z-index: 6;
+	top: 5px;
+	border: 1px solid #E1E1E1;
+
+	-moz-box-shadow: 2px 2px 2px #333333;
+	-webkit-box-shadow: 2px 2px 2px #333333;
+	
+}
+
+.unieap .u-xgrid-adjust-yes{
+
+}
+
+.unieap .move-top{
+	position: absolute;
+	left: 150px;
+	bottom: 21px;
+	width: 9px;
+	top: -5px;
+	height: 9px;
+	overflow: hidden;
+	margin-left: -5px;
+	z-index: 8;
+
+}
+
+.unieap .move-bottom{
+	position: absolute;
+	left: 150px;
+	bottom: -9px;
+	width: 9px;
+	height: 9px;
+	top: 20px;
+	overflow: hidden;
+	margin-left: -5px;
+
+}
+
+.unieap .locked-splitter{
+	/*border-right: 1px solid #000;*/
+	z-index: 1;
+}
+
+.unieap .row-locked-splitter{
+	border-top: 1px solid #000;
+}
+
+.unieap .xgrid-table-layout{
+	position: absolute;
+}
+
+.unieap .u-xgrid-focus{
+
+}
+
+.unieap .u-xgrid-menu{
+
+    right: 4px;
+    top: 0px;
+    width: 14px;
+    height: 20px;
+    visibility: hidden;
+    position: absolute;
+	display: block;
+}
+
+.unieap .u-xgird-menu-lockcell{
+
+}
+
+.unieap .u-xgird-menu-lockcellDisabled{
+
+	filter:alpha(opacity=50);
+	opacity : 0.5;/*FF兼容*/  
+}
+
+.unieap .u-xgird-menu-unlockcell{
+
+}
+
+.unieap .u-xgird-menu-unlockcellDisabled{
+
+	filter:alpha(opacity=50);
+	opacity : 0.5;/*FF兼容*/ 
+}
+
+.unieap .u-xgird-menu-columns{
+
+}
+
+.unieap .u-xgird-menu-unchecked{
+
+}
+
+.unieap .u-xgird-menu-checked{
+
+}
+
+.unieap .u-xgird-menu-checkedDisabled{
+
+	filter:alpha(opacity=50);
+	opacity : 0.5;/*FF兼容*/ 
+}
+
+/**
+ * 编辑
+ */
+.unieap .u-xgrid-value-changed{
+	    position:absolute;
+		top:0px;
+		left:0px;
+		width:5px;
+		height:18px;
+		overflow:hidden;
+		font-size:11px;
+}
+
+.unieap .u-xgrid-text{
+	vertical-align:middle;
+	overflow : hidden;
+	position: relative;
+}
+/**
+ * 处理IE下 表格内 input高度问题
+ */
+html.dj_ie .u-xgrid .u-xgrid-cell  input[type=text]{ 
+	height: 100%;
+}
+.unieap .xgrid-rowedit-container {
+	
+	position: absolute;
+	
+}
+
+.unieap .xgrid-rowedit-edit{
+	position: absolute;
+	border-top: 1px solid #1890FF;
+	border-bottom: 1px solid #1890FF;
+	background-color: #E6F7FF;
+	z-index: 2;
+}
+
+.unieap .xgrid-rowedit-inputDiv{
+	position: absolute;
+	top: 5px;
+	margin-bottom: 4px;
+	height: 100%;
+	overflow: hidden;
+}
+
+.unieap .xgrid-rowedit-lockedview{
+	position: absolute;
+}
+
+.unieap .xgrid-rowedit-splitter{
+	/* border-right:1px solid #000; */
+}
+
+
+.unieap .xgrid-rowedit-unlockedview{
+	position: absolute;
+	overflow: hidden;
+}
+
+.unieap .xgrid-rowedit-unlockedviewcontent{
+	position: absolute;
+	overflow: hidden;
+}
+
+.unieap .u-form-field:hover{
+	border: 1px solid #99BCE8;
+	-webkit-box-shadow: inset 0 0 1px #99BCE8;
+	-moz-box-shadow: inset 0 0 1px #99BCE8;
+	box-shadow: inset 0 0 1px #99BCE8;
+}
+
+.unieap .xgrid-rowedit-input{
+	border: 1px solid #B5B8C8;
+	width: 100%;
+	height: 100%;
+ 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#DEE3E6), to(#FFFFFF)); 
+	background: -moz-linear-gradient(top, #DEE3E6, #FFFFFF);
+}
+
+.unieap .xgrid-rowedit-cannotEdit{
+	/* background-color: #EAF1FB; */
+	border: 0 none;
+	font: 12px Arial,clean,sans-serif;
+	margin: 0 -1px 0 0;
+	padding: 2px 1px 1px 5px;
+	
+}
+
+.unieap .xgrid-rowedit-closeNodeDiv{
+	border: 1px solid #99BCE8;
+	border-bottom: 0 none;
+	height: 12px;
+	width: 11px;
+	top: -12px;
+	background-color: #EAF1FB;
+	position: absolute;
+	z-index: 111;
+	background-image:url("../images/xgrid/close-div.gif");
+}
+
+.unieap .xgrid-rowedit-closeNodeDiv:hover{
+	background-color: #B5B8C8;
+}
+/*
+.unieap .u-grid-header  .u-grid-cell .u-grid-menu{
+    right: 1px;
+    top: 0px;
+    width: 14px;
+    height: 20px;
+    visibility: hidden;
+}
+*/
+.unieap .u-xgrid-filter-cell{
+	font-weight:bold;
+}
+
+.unieap .u-xgird-menu-filtericon{
+}
+.unieap .u-grid-header	.u-grid-header-cell {
+	height:27px;
+	line-height: 27px;
+    width: 100%;
+	display:block;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	position:relative !important
+} 
+.u-xgrid-filter-body{
+	height:100%;
+	width:100%;
+	overflow:hidden;
+}
+.unieap .u-xgrid-filter{
+	text-align:center;
+}
+.unieap .u-xgrid-filter-table{
+	margin:10px auto 10px auto;
+	width:320px;
+	/* border:1px #d1d1d1 solid; */
+}
+.unieap .u-xgrid-filter-table select{
+	height:21px;
+	width:100%;
+	font-size:12px;
+}
+.unieap .u-xgrid-filter-table .u-menu-item-separator{
+	width:100%;
+	height:1px;
+	display:block;
+}
+
+.unieap .u-xgrid-filter-table .u-xgrid-filter-cancel {
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    margin-bottom: 2px;
+	cursor:pointer;
+}
+
+.unieap .u-xgrid-filter-table .u-xgrid-filter-ok {
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    margin-bottom: 2px;
+	cursor:pointer;
+}
+
+.unieap .u-xgrid-filter-table .u-xgrid-filter-del{
+	display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+i.iconfont.icon-color-picker {
+	position: absolute;
+	font-size: 12px;
+	color: #bfbfbf;
+}
+i.iconfont.icon-color-picker.up {
+	/* transform: rotate(180deg); */
+	-ms-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	top: -2px;
+	right: -7.3px;
+}
+i.iconfont.icon-color-picker.down {
+	right: -2px;
+	top: 3px;
+}
+i.iconfont.icon-color-picker.down.active,i.iconfont.icon-color-picker.up.active {
+	color: #1890ff;
+}
+
+.layer {
+border:1px solid #000;
+border-top:0;
+width:100%;
+background-color:#eee
+}
+
+.layer ul {
+list-style-type:circle;
+white-space:nowrap;
+margin:0 0 0 10px
+}
+
+.layer .tree {
+margin:0 0 0 -10px
+}
+
+.layer li {
+margin-left:10px;
+padding-top:0;
+list-style-type:none;
+white-space:nowrap
+}
+
+.layer .bullet {
+cursor:pointer;
+padding-left:10px
+}
+
+.layer .plus {
+background:url(../images/debug/plus.gif) no-repeat 1px;
+padding-left:10px
+}
+
+.layer .minus {
+background:url(../images/debug/minus.gif) no-repeat 1px;
+padding-left:10px
+}
+
+.layer .basic {
+padding-left:10px;
+width:16px;
+height:16px;
+background-repeat:no-repeat;
+background-position:center left
+}
+
+.layer .function {
+background:url(../images/debug/method.gif)
+}
+
+.layer .array {
+background:url(../images/debug/array.gif)
+}
+
+.layer .object {
+background:url(../images/debug/object.gif)
+}
+
+.layer .text {
+font:12px monospace;
+padding:2px 0 2px 2px
+}
+
+.layer .string,.layer .number,.layer .null,.layer .boolean {
+background:url(../images/debug/basic.gif)
+}
+#evalInput{
+	margin-top:0px;
+	margin-bottom:5px;
+	width:300px;
+}
+.btn{
+	font-size:12px;
+	background: url(../images/debug/button.gif) repeat-x #eee;;	
+	width:50px;
+	height : 23px;
+}
+/*@import url("../form/button/button.css");*/
+/** 对话框外层容器样式 **/
+.unieap .u-dlg table {
+}
+
+.unieap .u-dlg {
+	position: absolute;
+	z-index: 1001;
+}
+/** 头部样式 **/
+.unieap .u-dlg-mt {
+	height: 25px;
+	width: 100%;
+	overflow: hidden;
+	/*border-top: 1px solid #b5bcc7;*/
+	border-bottom: 1px solid #fff;
+	border-radius: 4px;
+}
+/** 头部左上角样式 **/
+.unieap .u-dlg-mtl {
+	height: 23px;
+	width: 1px;
+	overflow: hidden;
+	float: left;
+}
+/** 头部右上角样式 **/
+.unieap .u-dlg-mtr {
+	height: 23px;
+	width: 1px;
+	overflow: hidden;
+	float: right;
+}
+/** 头部内容样式 **/
+.unieap .u-dlg-mtc {
+	height: 23px;
+	cursor: default;
+	overflow: hidden;
+}
+/** 头部文字区域样式 **/
+.unieap .u-dlg-mtt {
+	height: 23px;
+	overflow: hidden;
+	float: left;
+	cursor: default;
+	padding-left: 5px;
+	line-height: 23px;
+}
+/** 头部按钮区域样式 **/
+.unieap .u-dlg-mtb {
+	height: 23px;
+	float: right;
+	cursor: default;
+	line-height: 23px;
+	width: 61px;
+	overflow: hidden;
+}
+/** 头部放大按钮样式 **/
+.unieap .u-dlg-mtb .u-dlg-be {
+	float: left;
+	margin-top: 3px;
+	width: 24px;
+	height: 18px;
+	overflow: hidden;
+	cursor: pointer;
+}
+/** 头部缩小按钮样式 **/
+.unieap .u-dlg-mtb .u-dlg-bs {
+	float: left;
+	margin-top: 4px;
+	width: 15px;
+	height: 14px;
+	overflow: hidden;
+	cursor: pointer;
+}
+/** 头部关闭按钮样式 **/
+.unieap .u-dlg-mtb .u-dlg-bc {
+	float:right;
+	margin-top:5px;
+	width: 16px;
+	height: 16px;
+	overflow:hidden;
+	cursor:pointer;
+	margin-left: 3px;
+	margin-right: 4px;
+}
+/** 内容区域样式 **/
+.unieap .u-dlg-mm {
+	width: 100%;
+	padding: 0px;
+	overflow: hidden;
+}
+/** 左边框样式 **/
+.unieap .u-dlg-ml {
+	float: left;
+	width: 5px;
+	overflow: hidden;
+	height: 100%;
+}
+
+.dj_ie6 .unieap .u-dlg-ml {
+	margin-right: -3px;
+}
+/** 右边框样式 **/
+.unieap .u-dlg-mr {
+	float: right;
+	width: 5px;
+	cursor: e-resize;
+	overflow: hidden;
+	height: 100%;
+}
+
+.dj_ie6 .unieap .u-dlg-mr {
+	margin-left: -3px;
+}
+/** 中间内容样式 **/
+.unieap .u-dlg-mmm {
+	width: auto;
+	height: 100%;
+	overflow: hidden;
+}
+/** 自定义内容外层样式 **/
+.unieap .u-dlg-mmf {
+	width: 100%;
+	overflow: hidden;
+}
+/** 自定义内容样式 **/
+.unieap .u-dlg-mmc {
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	position: relative;
+}
+/** 按钮定义区域样式 **/
+.unieap .u-dlg-mmb {
+	text-align:center;	
+	padding-top:7px;
+    height:34px;
+}
+/** 底部边框样式 **/
+.unieap .u-dlg-mb {
+	height: 5px;
+	width: 100%;
+	overflow: hidden;
+	cursor: s-resize;
+}
+/** 底部左下角边框样式 **/
+.unieap .u-dlg-mbl {
+	height: 5px;
+	width: 5px;
+	float: left;
+	overflow: hidden;
+}
+/** 底部右下角边框样式 **/
+.unieap .u-dlg-mbr {
+	height: 5px;
+	width: 5px;
+	float: right;
+	overflow: hidden;
+}
+/** 底部内容边框样式 **/
+.unieap .u-dlg-mbc {
+	height: 5px;
+	overflow: hidden;
+}
+
+.unieap .u-dlg-backgroundIframe {
+	border: 0px;
+	position: absolute;
+	z-index: -2;
+}
+
+/**  在对话框上再次弹出对话框时，对前一对话框进行遮挡的层 **/
+.unieap .u-dlg-modalDiv {
+	background-color: #c3daf9;
+	border: 1px solid #6593cf;
+	z-index: 1001;
+	overflow: hidden;
+	position: absolute;
+	left: 0;
+	top: 0;
+	filter: Alpha(Opacity =   "50");
+	opacity: .50;
+}
+
+.unieap .unieap-dlg-BackgroundIframe {
+	position: absolute;
+	z-index: 1000;
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
+.unieap  .unieap-dlg-contentIframe {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+	padding-top: 0;
+	padding-right: 0;
+	margin: 0;
+}
+
+.unieap .u-dlg-moveDiv {
+	filter: Alpha(Opacity =   "50");
+	border: 1px solid #6593cf;
+	z-index: 10001;
+	overflow: hidden;
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: .50;
+}
+
+.unieap .u-dlg-bgMaskDialog-IE6 {
+	background-color: #000;
+	filter: Alpha(Opacity =   "0");
+	opacity: 0.35;
+	position: absolute;
+	z-index: 2998;
+	}
+
+.unieap .u-dlg-bgMaskDialog-IE {
+	background-color: #000;
+	box-shadow: 0 2px 14px 1px rgba(0, 0, 0, 0.15);
+	filter: Alpha(Opacity =   "0");
+	opacity:0.35;
+	position: absolute;
+	z-index: 2998;
+	}
+	
+.unieap .u-dlg-bgMaskDialog-notIE {
+	background-color: #000;
+	box-shadow: 0 2px 14px 1px rgba(0, 0, 0, 0.15);
+	filter: Alpha(Opacity =   "0");
+	opacity:0.35;
+	position: absolute;
+	z-index: 2998;
+	} 
+
+.unieap .messageBg table td {
+}
+
+.questionIcon {
+	width: 32px;
+	height: 32px;
+}
+
+.errorIcon {
+	width: 32px;
+	height: 32px;
+}
+
+.infoIcon {
+	width: 32px;
+	height: 32px;
+}
+
+.warnIcon {
+	margin-left: 2px; width : 32px;
+	height: 32px;
+	width: 32px;
+}
+/*@import url("../form/button/button.css");*/
+/** 对话框外层容器样式 **/
+.unieap .u-xdlg table {
+	
+}
+
+.unieap .u-xdlg {
+	position: absolute;
+	z-index: 999;
+}
+/** 头部样式 **/
+.unieap .u-xdlg-mt {
+	height: 23px;
+	width: 100%;
+	overflow: hidden;
+}
+/** 头部左上角样式 **/
+.unieap .u-xdlg-mtl {
+	height: 23px;
+	width: 5px;
+	overflow: hidden;
+	float: left;
+}
+/** 头部右上角样式 **/
+.unieap .u-xdlg-mtr {
+	height: 23px;
+	width: 5px;
+	overflow: hidden;
+	float: right;
+}
+/** 头部内容样式 **/
+.unieap .u-xdlg-mtc {
+	height: 23px;
+	cursor: default;
+	overflow: hidden;
+	-moz-user-select: -moz-none;
+}
+/** 头部文字区域样式 **/
+.unieap .u-xdlg-mtt {
+	overflow: hidden;
+	cursor: default;
+}
+/** 头部按钮区域样式 **/
+.unieap .u-xdlg-mtb {
+	height: 23px;
+	/*float: right;*/
+	cursor: default;
+	line-height: 23px;
+	width: 61px;
+	overflow: hidden;
+}
+/** 头部放大按钮样式 **/
+.unieap .u-xdlg-mtb .u-xdlg-be {
+	float: left;
+	margin-top: 3px;
+	width: 24px;
+	height: 18px;
+	overflow: hidden;
+	cursor: pointer;
+}
+/** 头部缩小按钮样式 **/
+.unieap .u-xdlg-mtb .u-xdlg-bs {
+	float: left;
+	margin-top: 4px;
+	width: 15px;
+	height: 14px;
+	overflow: hidden;
+	cursor: pointer;
+}
+/** 头部关闭按钮样式 **/
+.unieap .u-xdlg-mtb .u-xdlg-bc {
+	float:right;
+	margin-top:4px;
+	margin-left: 3px;
+	/*width: 14px;*/
+	/*height: 14px;*/
+	width: 56px;
+	height: 48px;
+	overflow:hidden;
+	cursor:pointer;
+}
+/** 内容区域样式 **/
+.unieap .u-xdlg-mm {
+	width: 100%;
+	padding: 12px 30px 8px 30px;
+	/*overflow: hidden;*/
+}
+
+/** 等待载入图标 **/
+.unieap .u-xdlg-mm .u-xdlg-loading {
+	background-position: center;
+	cursor: wait;
+}
+
+/** 左边框样式 **/
+.unieap .u-xdlg-ml {
+	float: left;
+	width: 5px;
+	overflow: hidden;
+	height: 100%;
+}
+
+.dj_ie6 .unieap .u-xdlg-ml {
+	margin-right: -3px;
+}
+/** 右边框样式 **/
+.unieap .u-xdlg-mr {
+	float: right;
+	width: 5px;
+	cursor: e-resize;
+	overflow: hidden;
+	height: 100%;
+}
+
+.dj_ie6 .unieap .u-xdlg-mr {
+	margin-left: -3px;
+}
+/** 中间内容样式 **/
+.unieap .u-xdlg-mmm {
+	width: auto;
+	height: 100%;
+	overflow: hidden;
+}
+/** 自定义内容外层样式 **/
+.unieap .u-xdlg-mmf {
+	width: 100%;
+	overflow: hidden;
+}
+/** 自定义内容样式 **/
+.unieap .u-xdlg-mmc {
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	position: relative;
+}
+/** 按钮定义区域样式 **/
+.unieap .u-xdlg-mmb {
+	text-align: center;
+	padding-top: 7px;
+	height: 34px;
+}
+/** 底部边框样式 **/
+.unieap .u-xdlg-mb {
+	height: 5px;
+	width: 100%;
+	overflow: hidden;
+	cursor: s-resize;
+}
+/** 底部左下角边框样式 **/
+.unieap .u-xdlg-mbl {
+	height: 5px;
+	width: 5px;
+	float: left;
+	overflow: hidden;
+}
+/** 底部右下角边框样式 **/
+.unieap .u-xdlg-mbr {
+	height: 5px;
+	width: 5px;
+	float: right;
+	overflow: hidden;
+}
+/** 底部内容边框样式 **/
+.unieap .u-xdlg-mbc {
+	height: 5px;
+	overflow: hidden;
+}
+
+/**  在对话框上再次弹出对话框时，对前一对话框进行遮挡的层 **/
+.unieap .u-xdlg-modalDiv {
+	background-color: #c3daf9;
+	border: 1px solid #6593cf;
+	z-index: 999;
+	overflow: hidden;
+	position: absolute;
+	left: 0;
+	top: 0;
+	filter: Alpha(Opacity = "50");
+	opacity: .50;
+}
+
+.unieap .u-xdlg-moveDiv {
+	filter: Alpha(Opacity = "50");
+	border: 1px solid #6593cf;
+	z-index: 10001;
+	overflow: hidden;
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: .50;
+}
+
+.unieap .u-xdlg-bgMaskDialog-IE6 {
+	background-color: #000;
+	/*box-shadow: 0 2px 14px 1px rgba(0, 0, 0, 0.15);*/
+	filter: Alpha(Opacity =   "0");
+	opacity:0.35;
+	position: absolute;
+	z-index: 998;
+	}
+
+.unieap .u-xdlg-bgMaskDialog-IE {
+	background-color: #000;
+	box-shadow: 0 2px 14px 1px rgba(0, 0, 0, 0.15);
+	filter: Alpha(Opacity =   "0");
+	opacity:0.35;
+	position: absolute;
+	z-index: 998;
+	}
+	
+.unieap .u-xdlg-bgMaskDialog-notIE {
+	background-color: #000;
+	box-shadow: 0 2px 14px 1px rgba(0, 0, 0, 0.15);
+	filter: Alpha(Opacity =   "0");
+	opacity: 0.35;
+	position: absolute;
+	z-index: 998;
+	} 
+
+.unieap .messageBg table td {
+	
+}
+
+.questionIcon {
+	width: 32px;
+	height: 32px;
+}
+
+.errorIcon {
+	width: 32px;
+	height: 32px;
+}
+
+.infoIcon {
+	width: 32px;
+	height: 32px;
+}
+
+.warnIcon {
+	margin-left: 2px;
+	width: 32px;
+	height: 32px;
+	width: 32px;
+}
+/**
+ * Menu的基本样式
+ */
+.unieap .dijitPopup {
+	position: fixed;
+	background-color: transparent;
+	margin: 0;
+	border: 0;
+	padding: 0;
+	overflow-y: auto;
+}
+
+.unieap .dijitBackgroundIframe {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
+.unieap .u-menu-table{
+    margin: 0;
+    max-width: 200px;
+    width: auto;
+    font-size: 12px;
+    table-layout: fixed;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    max-height: 350px;
+    display: block;
+    overflow-y: auto;
+}
+.unieap .u-menu-item{
+	padding:1px 2px 1px 2px;	
+	height: 21px;
+	cursor : default;
+}
+.unieap .u-menu-item .icon-show_combine{
+	font-family: "iconfont" !important;
+	font-size: 16px;
+	font-style: normal;
+	color: rgba(41, 153, 245, 0.664);
+	vertical-align: middle !important;
+	margin-bottom:11px;
+}
+.unieap .u-menu-item .icon-show_removal{
+	font-family: "iconfont" !important;
+	font-size: 16px;
+	font-style: normal;
+	color: rgba(41, 153, 245, 0.664);
+	vertical-align: middle !important;
+	margin-bottom:11px;
+}	
+.unieap .u-menu-item .icon-show_rename{
+	font-family: "iconfont" !important;
+	font-size: 16px;
+	font-style: normal;
+	color: rgba(41, 153, 245, 0.664);
+	vertical-align: middle !important;
+	margin-bottom:11px;
+}	
+.unieap .u-menu-item .icon-start{
+	font-family: "iconfont" !important;
+	font-size: 16px;
+	font-style: normal;
+	color: rgba(41, 153, 245, 0.664);
+	vertical-align: middle !important;
+	margin-bottom:11px;
+}	
+.unieap .u-menu-item .icon-stop{
+	font-family: "iconfont" !important;
+	font-size: 16px;
+	font-style: normal;
+	color: rgba(41, 153, 245, 0.664);
+	vertical-align: middle !important;
+	margin-bottom:11px;
+}	
+	
+.unieap .u-menu-itemHover{
+}
+.unieap .u-menu-itemDisabled{
+}
+.unieap .u-menu-separator{
+	overflow:hidden;
+	height:2px;
+	vertical-align : middle;
+}
+.unieap .u-menu-separator .left{
+	padding-left:4px;
+	width:20px;
+}
+.unieap .u-menu-separator .middle{
+	padding :0px;
+}
+.unieap .u-menu-separator .right{
+	padding-right:4px;
+	width:20px;
+}
+.unieap .u-menu-item-separator{
+	overflow:hidden;
+	height:1px;
+	width:100%;
+}
+.unieap .u-menu-itemLeft{
+	width:35px;
+	overflow:hidden;
+}
+.unieap .u-menu-itemLeft div {
+	width: 16px;
+	height: 16px;
+	margin-left:2px;
+}
+
+
+.unieap .u-menu-itemLabel{
+	position : relative;
+	padding : 5px 0px 1px 2px;
+}
+.unieap .u-menu-itemLabel nobr{
+	width:100%;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+.unieap .u-menu-itemRight{
+	width:20px;
+	margin:0;
+}
+.unieap .u-menu-expand{
+	height : 16px;
+	width: 16px;
+}
+.unieap .u-menu-dateIcon{
+}
+.unieap .u-menu-expandEnabled{
+} 
+.dj_ie6 .unieap .u-menu-expandEnabled {
+}
+.unieap .u-menu-expandDisabled{
+} 
+.dj_ie6 .unieap .u-menu-expandDisabled {
+}
+/*2018.12.19 sxf 增加menu样式*/
+
+.custommodel * {
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.custommodel li {
+	margin: 0;
+	padding: 0;
+}
+.custommodel ul {
+	list-style-type: none;
+}
+.custommodel .menumny{
+	width:50px;
+	align:right;
+	padding-right:10px;
+}
+.custommodel a {
+	color: #000;
+	text-decoration: none;
+}
+
+.custommodel li img{
+	width:24px;
+	height:24px;
+	margin-left:10px;
+}
+
+.custommodel .accordion {
+	width: 100%;
+	max-width: 500px;
+	margin: 0px auto 0px;
+	/*background: #FFF;*/
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+.custommodel table {
+	width:100%;
+}
+
+.custommodel .accordion .link {
+	cursor: pointer;
+	display: block;
+	padding: 15px 15px 15px 16px;
+	/*Regular;*/
+	font-size:14px;
+	color:#666666;
+}
+.custommodel .accordion li.open .link {
+	/*Regular;*/
+	font-size:14px;
+	color:#666666;
+}
+.custommodel .accordion li i {
+	margin-top: 6px;
+	left: 12px;
+	font-size: 18px;
+	color: #595959;
+	-webkit-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+	width:15px;
+	height:5px;
+	float: right;
+}
+
+.custommodel .accordion li i.fa-right-down {
+	right: 12px;
+	left: auto;
+	width: 5px;
+	height: 8px;
+	font-size: 16px;
+	background:url(../../light/images/indexImg/nav-right.png) no-repeat center center;
+	background-size:5px 8px;
+	filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+}
+
+.custommodel .accordion li i.icon2 {
+	right: auto;
+	left: 30px;
+	font-size: 16px;
+}
+
+.custommodel .accordion li i.fa-left-down {
+	top: 18px;
+	right: auto;
+	left: 1px;
+	font-size: 16px;
+}
+
+.custommodel .accordion li.open i {
+	color: #000;
+}
+.custommodel .accordion li.open i.fa-right-down {
+	-webkit-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+/**
+ * Submenu
+ -----------------------------*/
+.custommodel .submenu {
+	display: none;
+	/*background: #444359;*/
+	font-size: 14px;
+}
+
+.custommodel .submenu li {
+	/*border-bottom: 1px solid #DCDCDC;*/
+	/*height:60px;*/
+}
+
+.custommodel .submenu a {
+	display: block;
+	text-decoration: none;
+	/*color: #d9d9d9;*/
+	/*padding: 12px;
+    padding-left: 2px;*/
+	-webkit-transition: all 0.25s ease;
+	-o-transition: all 0.25s ease;
+	transition: all 0.25s ease;
+	padding:9px 0;
+}
+
+/*@yll*/
+.custommodel.delEdit .submenu a{
+	position:relative;
+}
+.custommodel.delEdit .submenu a table{
+	padding-left:17px;
+}
+.custommodel.delEdit .submenu a span.line-del{
+	position:absolute;
+	left:5px;
+	top:26px;
+	width:8px;
+	height:7px;
+	background:url('../../light/images/icon-redclose.png') no-repeat left center/7px 7px;
+}
+.custommodel .submenu a span {
+	display: block;
+	overflow:hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding-left: 9px;
+}
+
+.custommodel .submenu a:hover {
+	background: #F3F3F3;
+}
+
+.custommodel .submenu .patternR {
+	display: block;
+	color:#333333;
+	text-align: justify;
+	font-size: 14px;
+	letter-spacing: -0.34px;
+	float:right;
+	padding-right: 10px;
+}
+.custommodel .submenu .projName {
+	font-size:14px;
+	color:#333333;
+	letter-spacing:-0.34px;
+	width: 175px;
+	float:left;
+	padding-left: 10px;
+}
+.custommodel .submenu .status {
+	/*Regular;*/
+	font-size:12px;
+	color:#333333;
+	letter-spacing:-0.29px;
+	line-height:14px;
+	padding-top: 3px;
+	float:right;
+	padding-right: 10px;
+}
+.custommodel .submenu .detail {
+	/*Regular;*/
+	font-size:12px;
+	color:#999999;
+	letter-spacing:-0.29px;
+	line-height:14px;
+}
+
+/* 点击选中class */
+.custommodel li.focus {
+	background-color: #F3F3F3;
+}
+.unieap .menuBarItem {
+	display:inline-block;
+	#zoom: 1; 
+	#display:inline; 
+	border:0;
+	padding:0;
+	vertical-align:middle;
+	#vertical-align: auto;	
+}
+/**
+* Tooltip组件的基本样式
+**/
+.dijitTooltip {
+	position: absolute;
+	z-index: 2000;
+	display: block;
+	left: 50%;
+	top: -10000px;
+	overflow: visible;
+}
+
+.dijitTooltipContainer {
+	font-size: small;
+}
+
+.dijitTooltipFocusNode {
+	padding: 2px 2px 2px 2px;
+}
+
+.dijitTooltipConnector {
+	position: absolute;
+}
+
+.dijitTooltipData {
+	display:none;
+}
+.unieap .dijitTooltip{
+	background: transparent;	
+}
+
+.unieap .dijitTooltipBelow {
+	padding-top: 13px;
+}
+
+.unieap .dijitTooltipAbove {
+	/* leave room for arrow below content */
+	padding-bottom: 13px;
+}
+
+.unieap .dijitTooltipContainer {
+	padding: 0.45em;	
+	-webkit-border-radius: 3px;
+	font:normal normal normal 12px verdana;
+}
+.dj_ff3 .unieap .dijitTooltipContainer {
+	/* only do this for FF3, because FF2 has problems with glitches */
+	-moz-border-radius: 3px;
+}	
+.unieap .dijitTooltipConnector {
+	/* the arrow piece */
+	border:0px;
+	z-index: 2;
+}
+.unieap .dijitTooltipABRight .dijitTooltipConnector {
+	/* above or below tooltip, but the arrow appears on the right,
+		and the right edges of target and tooltip are aligned rather than the left */
+	left: auto !important;
+	right: 3px;
+}
+
+.unieap .dijitTooltipBelow .dijitTooltipConnector {
+	/* the arrow piece for tooltips below an element */
+	top: 0px;
+	left: 3px;
+	width:16px;
+	height:14px;
+}
+
+.dj_ie6 .unieap .dijitTooltipBelow .dijitTooltipConnector {
+	/* use gif for IE7 too, due to png rendering problems on fade-in (see http://trac.dojotoolkit.org/ticket/6555) */
+}
+
+.unieap .dijitTooltipAbove .dijitTooltipConnector {
+	/* the arrow piece for tooltips above an element */
+	bottom: 0px;
+	left: 3px;
+	width:16px;
+	height:14px;
+}
+.dj_ie6 .unieap .dijitTooltipAbove .dijitTooltipConnector {
+}
+.dj_ie6 .unieap .dijitTooltipAbove .dijitTooltipConnector {
+	bottom: -3px;
+}
+
+.unieap .dijitTooltipLeft {
+	padding-right: 14px;
+}
+.dj_ie6 .unieap .dijitTooltipLeft {
+	padding-left: 15px;
+}
+.unieap .dijitTooltipLeft .dijitTooltipConnector {
+	/* the arrow piece for tooltips to the left of an element, bottom borders aligned */
+	right: 0px;
+	bottom: 3px;
+	width:16px;
+	height:14px;
+}
+.dj_ie6 .unieap .dijitTooltipLeft .dijitTooltipConnector {
+}
+
+.unieap .dijitTooltipRight {
+	padding-left: 14px;
+}
+.unieap .dijitTooltipRight .dijitTooltipConnector {
+	/* the arrow piece for tooltips to the right of an element, bottom borders aligned */
+	left: 0px;
+	bottom: 3px;
+	width:16px;
+	height:14px;
+}
+.dj_ie6 .unieap .dijitTooltipRight .dijitTooltipConnector {
+}
+
+.dj_webkit .unieap .dijitPopup .dijitTooltipContainer,
+.dj_webkit .unieap .dijitPopup .dijitMenu {
+	/* -webkit-border-radius: 5px; */
+}
+
+
+.unieap  .dijitTooltipContainerLoadingImage {
+	width:20px;
+    background-color: #fafafa;
+    left:0px;
+    height:18px;
+    position:absolute !important;
+}
+.dj_ie6 .unieap .dijitTooltipContainerLoadingImage {
+}
+.unieap  .dijitTooltipContainerLoadingText{
+  left:20px;
+  position:absolute;
+  top:2px;
+}
+
+.unieap  .dijitTooltipContainerLoadingContainer{
+  padding-left:20px;
+  position:relative;
+  width:172px;
+  height:18px;
+}
+/**
+ * loading的基本样式
+ */
+.unieap .loading{
+	position:absolute;
+	right:0;
+	bottom:0;
+	width:100%;
+	height:100%;
+	z-Index:10001;
+	background-color: rgba(0,0,0,0.1);
+}
+.unieap .loading-alpha{
+	position:absolute;
+	/*top:0px;*/
+	/*left:0px;*/
+	/*width:100%;*/
+	/*height:100%;*/
+	/*opacity:.50;*/
+	filter: alpha(opacity=50);
+	overflow:hidden;
+	width: 116px;
+	height: 86px;
+	background-color: #fff;
+	top: calc(50% - 41px);
+	left: calc(50% - 53px);
+	border-radius: 4px;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.unieap .loading-p{
+	position:absolute;
+	width:241px;
+	height:72px;
+	display:block;
+	left:50%;
+	top:50%;
+}
+.unieap .loading-content{
+	position:relative;	
+	top:-50%;
+	left:-50%;
+	width:241px;
+	/*height:72px;*/
+}
+.unieap .loading-text{
+	text-align:left;
+	padding:10px 0px 10px 15px;
+
+
+	font-size:12px;
+	font-family : tahoma, arial, helvetica, sans-serif;
+	color : #333;
+
+}
+.unieap .loading-img{
+
+	cursor:wait;
+	width: 208px;
+	height:13px;	
+	margin-left:15px;
+}
+.unieap .loading-cancel{
+	position:absolute;
+	top:-12px;
+	right:4px;
+	width:14px;
+	height:14px;
+	cursor:pointer;
+}
+/**
+*	ProgressBar基本样式
+**/
+.unieap .dijitProgressBar {
+	margin:2px 0px 2px 0px;
+}
+
+.unieap .dijitProgressBarEmpty{
+}
+
+.unieap .dijitProgressBarTile{
+}
+
+.unieap .dijitProgressBarFull {
+}
+
+.unieap .dijitProgressBarLabel {
+}
+
+.unieap .dijitProgressBarIndeterminate .dijitProgressBarTile {
+}
+
+.dijitProgressBarEmpty{
+	position:relative;overflow:hidden;
+	border:1px solid black; 	
+	z-index:0;			
+}
+
+.dijitProgressBarFull {
+	position:absolute;
+	overflow:hidden;
+	z-index:-1;
+	top:0;
+	width:100%;
+}
+.dj_ie6 .dijitProgressBarFull {
+	height:1.6em;
+}
+
+.dijitProgressBarTile {
+	position:absolute;
+	overflow:hidden;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+	margin:0;
+	padding:0;
+	width:auto;
+	height:auto;
+	background-attachment: fixed;
+}
+
+.dijit_a11y .dijitProgressBarTile{
+	border-width:4px;
+	border-style:solid;
+	background-color:transparent !important;
+}
+
+.dj_ie6 .dijitProgressBarTile {
+	position:static;
+	height:1.6em;
+}
+
+.dijitProgressBarIndeterminate .dijitProgressBarLabel {
+	visibility:hidden;
+}
+
+.dijitProgressBarIndeterminate .dijitProgressBarTile {
+}
+
+.dijitProgressBarIndeterminateHighContrastImage {
+	display:none;
+}
+
+.dijit_a11y .dijitProgressBarIndeterminate .dijitProgressBarIndeterminateHighContrastImage {
+	display:block;
+	position:absolute;
+	top:0;
+	bottom:0;
+	margin:0;
+	padding:0;
+	width:100%;
+	height:auto;
+}
+
+.dijitProgressBarLabel {
+	display:block;
+	position:static;
+	width:100%;
+	text-align:center;
+}
+/**
+ * xhr加载时，loading的基本样式
+ */
+.unieap .loadingxhr{
+	position:absolute;
+	right:0;
+	bottom:0;
+	width:100%;
+	height:100%;
+	z-Index:10001;
+	background-color: rgba(0,0,0,0.1);
+	/*opacity: 0.35;*/
+}
+.unieap .loadingxhr-alpha{
+	position:absolute;
+	top:calc(50% - 41px);
+	left:calc(50% - 53px);
+	width:100%;
+	height:100%;
+	filter: alpha(opacity=50);
+	/*opacity:0.01;*/
+	overflow:hidden;
+	background-color: #fff;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+	border-radius: 4px;
+
+}
+.unieap .loadingxhr-p{
+	position:absolute;
+	width:241px;
+	height:72px;
+	display:block;
+	left:50%;
+	top:0%;
+}
+.unieap .loadingxhr-content{
+	position:relative;	
+	top:0%;
+	left:-50%;
+	width:160px;
+	height:30px;
+}
+.unieap .loadingxhr-text{
+	text-align:left;
+	position: absolute;
+	display: inline-block;
+	padding:8px 0px 10px 25px;
+	font-size:12px;
+	font-family : tahoma, arial, helvetica, sans-serif;
+	color : #333;
+	top: 0px;
+}
+.unieap .loadingxhr-img{
+	display: inline-block;
+	cursor:wait;
+	width: 20px;
+	height:30px;	
+	margin-left:3px;
+}
+.unieap .loadingtab-img{
+	display: inline-block;
+	cursor:wait;
+	width: 15px;
+	height:15px;	
+	margin-left:3px;
+}
+
+.unieap .loadingxhr-cancel{
+	position:absolute;
+	top:-12px;
+	right:4px;
+	width:14px;
+	height:14px;
+	cursor:pointer;
+}
+@CHARSET "UTF-8";
+.unieap .wizard-wrapper {
+	position: relative;
+}
+.unieap .wizard-container {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.unieap .wizard-nav {
+	display: block;
+	width: 100%;
+	height: 24px;
+	bottom: 0px;
+	position: absolute;
+}
+
+.unieap .wizard-nav-btn {
+	display: block;
+	margin: 0px 5px 2px 5px;
+}

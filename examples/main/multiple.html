@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title> multiple </title>
+  <style>
+    body {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    #topList{
+      position: fixed;
+      top: 0;
+      left: 20%;
+    }
+    #topList li{
+      display: inline-block;
+      min-width: 100px;
+    }
+    li{
+      list-style: none;
+    }
+    
+  </style>
+</head>
+
+<body>
+  <div id="topList">
+    <ul>
+      <li>react</li>
+      <li>vue</li>
+      <li>html</li>
+    </ul>
+  </div>
+  <div id="navList" class="mainapp-sidemenu">
+    <ul>
+      <li  data-name='react15' data-type='navList' data-local='7102'>react</li>
+      <li data-name='vue' data-type='navList'  data-local='7101'>vue</li>
+      <li data-name='html' data-type='navList'  data-local='7104'>html</li>
+    </ul>
+  </div>
+  <!-- <button id="unmount" >unmount</button>
+  <button id="mount">mount</button> -->
+
+  <div id='container'>
+    <div class="navcontainer" id="react15" data-name='react15'></div>
+    <div class="navcontainer" id="vue"></div>
+    <div class="navcontainer" id="html"></div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,298 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purehtml Example</title>
+  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js">
+  </script>
+</head>
+<body>
+  <div style="display: flex; justify-content: center; align-items: center; height: 200px;">
+    Purehtml Example
+  </div>
+  <div id="purehtml-container" style="text-align:center"></div>
+  <script src="//localhost:7104/dojo.js.uncompressed.js"  ></script>
+  <script src="//localhost:7104/unieap-all.js" ></script>
+  <script src="//localhost:7104/unieapx-all.js" ></script>
+  <script src="//localhost:7104/entry.js" entry></script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv=”X-UA-Compatible” content="IE=edge,chrome=1" />
+  <title>望海康信</title>
+  <script src="//localhost:7104/dojo.js.uncompressed.js"></script>
+  <script src="//localhost:7104/unieap-all.js"></script>
+  <script src="//localhost:7104/unieapx-all.js"></script>
+  <script type="text/javascript">
+    if (!window.beginTime) {
+      beginTime = new Date().getTime();
+    }
+    dojoConfig = {
+      isDebug: false,
+      parseOnLoad: true,
+      locale: 'zh',
+      cacheBust: version = 20200228,
+      foo: "bar"
+    };
+  </script>
+  <script type="text/javascript">
+    var dataCenter = new unieap.ds.DataCenter();
+    /*用于单帧菜单，非单帧情况可以不定义*/
+    unieap.WEB_APP_NAME = '/OES';
+    unieap.appPath = unieap.WEB_APP_NAME + '/plugins';
+    unieap.WEB_PAGE_NAME = "deptReport-dept_14_5";
+    unieap.locale = "zh_CN";
+    unieap.userAccount = "oes";
+    unieap.cmpPath = '/OES/ui/vhwsp';
+    unieap.staticPath = 'http://10.0.23.51/6.0.1.X';
+
+
+
+    if (typeof (RIA_UNIEAPX_I18N) === 'undefined') {
+      dojo.require("unieapx.nls.application_" + unieap.locale);
+    }
+    /*存储每个页面中view和viewc的名字，单帧下key为rootNodeId，非单帧下为viewContext*/
+    if (typeof (unieapViewContextHolder) == "undefined") {
+      unieapViewContextHolder = {};
+    }
+    // 第一次上传文件异常处理
+    dojo.require("dojo.io.iframe");
+    if (dojo.io.iframe) {
+      dojo.io.iframe.create(dojo._scopeName + "IoIframe", dojo._scopeName + ".io.iframe._iframeOnload();");
+    }
+    /*************** 页面请求参数 *****************************/
+    unieap.page = unieap.page || {};
+    unieap.page.actionName = "null";
+    unieap.page.params = { "page": ["deptReport-dept_14_5"], "menuId": ["105001450525"], "dojo.preventCache": ["1657078334386"] };
+
+    for (var key in unieap.page.params) {
+      unieap.page.params[key] = unieap.page.params[key][0];
+      dataCenter.setParameter(key, unieap.page.params[key]);
+
+    }
+
+    unieap.loginUser = {};
+
+    //登录账号
+    unieap.loginUser.account = "oes";
+    //登录名
+    unieap.loginUser.name = "OES";
+
+    unieap.loginUser.lastMod = "dept";
+    //登录时间
+    unieap.loginUser.loginDate = new Date(1657036800000);
+    //登录单位
+    unieap.loginUser.compCode = "1000";
+    //登录单位
+    unieap.loginUser.compName = 'XX医院';
+    //登录账套
+    unieap.loginUser.copyCode = "101";
+    //登录科室ID
+    unieap.loginUser.deptId = 526;
+    //登录科室编码
+    unieap.loginUser.deptCode = "100039";
+    //登录年
+    unieap.loginUser.acctYear = "2022";
+    //登录月
+    unieap.loginUser.acctMonth = "07";
+    //用户绑定的职工创建时所在的部门CODE
+    unieap.loginUser.deptCodeByCreate = "100039";
+    //用户绑定的职工创建时所在的部门ID
+    unieap.loginUser.deptIdByCreate = "526";
+    //用户绑定的职工创建时所在的单位CODE
+    unieap.loginUser.compCodeByCreate = "1000";
+    //用户绑定的职工ID
+    unieap.loginUser.empId = 6148;
+
+    var acctHomeParams = {
+      isLogin: '1',
+      acctYear: unieap.loginUser.acctYear,
+      acctMonth: unieap.loginUser.acctMonth
+    };
+
+    /*************** 页面请求参数 *****************************/
+    top.unieap.loginUser = unieap.loginUser;
+  </script>
+
+  <script type="text/javascript" scope="processor"
+    src="./dept_14_5-processor.js?version=1657086616475"></script>
+  <script type="text/javascript" scope="view"
+    src="./dept_14_5-view.js?version=1657086616475"></script>
+  <script type="text/javascript">
+    if (!window["dataCenter"]) {
+      dataCenter = new unieap.ds.DataCenter();
+    }
+    dojo.addOnLoad(function () {
+      var interval = new Date().getTime() - beginTime;
+      console.log("interval: " + interval + "ms");
+      dataCenter.setParameter("_control_interval", interval + "ms");
+      dept_14_5.page_initEvents && dojo.hitch(dept_14_5, dept_14_5.page_initEvents)();
+      dept_14_5.page_load && dojo.hitch(dept_14_5, dept_14_5.page_load)();
+
+    });
+
+  </script>
+
+</head>
+
+<body class="unieap">
+  <div dojoType='unieap.xdialog.Dialog' url='/OES/ui/vhwsp?page=deptReport-deptReportNoBranchDept' width='400px'
+    id='xdialog1'>
+  </div>
+  <div dojoType='unieap.layout.AdaptiveContainer' id='adaptiveContainer1'>
+    <div dojoType='unieap.layout.AdaptivePane' width='auto'>
+      <div dojoType='unieap.form.Form' class='u-form query_form' id='form1' binding="{store:'deptReport'}">
+        <table id='form1_tableLayout' style='table-layout:fixed;'>
+          <colgroup>
+            <col>
+            </col>
+            <col>
+            </col>
+            <col>
+            </col>
+            <col>
+            </col>
+            <col>
+            </col>
+            <col>
+            </col>
+          </colgroup>
+          <tbody>
+            <tr id='form1_2_tr'>
+              <td rowSpan='1' id='year_label_td' align='right'>
+                <label id='year_label'>年度</label>
+              </td>
+              <td rowSpan='1' colSpan='1' id='year_td'>
+                <div dojoType='unieap.form.ComboBox' width='100%' maxLength='40' id='year' required='true'
+                  popup="{height:'300px'}" dataProvider="{store:'year'}" dataFilter="{spellAttr:'py'}"
+                  binding="{name:'year'}" decoder="{displayAttr:'accYear',valueAttr:'accYear'}">
+                </div>
+              </td>
+              <td rowSpan='1' id='startMonth_label_td' align='right'>
+                <label id='startMonth_label'>起始月</label>
+              </td>
+              <td rowSpan='1' colSpan='1' id='startMonth_td'>
+                <div dojoType='unieap.form.ComboBox' width='100%' maxLength='40' id='startMonth' required='true'
+                  popup="{height:'300px'}" dataProvider="{store:'copyStartMonth'}" dataFilter="{spellAttr:'py'}"
+                  binding="{name:'startMonth'}">
+                </div>
+              </td>
+              <td rowSpan='1' id='endMonth_label_td' align='right'>
+                <label id='endMonth_label' class='no_colon' style='text-align:right;'>至</label>
+              </td>
+              <td rowSpan='1' colSpan='1' id='endMonth_td'>
+                <div dojoType='unieap.form.ComboBox' width='100%' maxLength='40' id='endMonth' required='true'
+                  popup="{height:'300px'}" dataProvider="{store:'copyStartMonth'}" dataFilter="{spellAttr:'py'}"
+                  binding="{name:'endMonth'}">
+                </div>
+              </td>
+            </tr>
+            <tr id='form1_5_tr'>
+              <td rowSpan='1' id='cbjc_label_td' align='right'>
+                <label id='cbjc_label'>成本级次</label>
+              </td>
+              <td rowSpan='1' colSpan='1' id='cbjc_td'>
+                <div dojoType='unieap.form.ComboBox' hasDefault='true' width='100%' id='cbjc' required='true'
+                  popup="{height:'300px'}" dataProvider="{store:'cbjc_query'}" dataFilter="{spellAttr:'py'}"
+                  binding="{name:'cbjc'}">
+                </div>
+              </td>
+              <td rowSpan='1' id='deptLevel_label_td' align='right'>
+                <label id='deptLevel_label'>科室级别</label>
+              </td>
+              <td rowSpan='1' colSpan='1' id='deptLevel_td'>
+                <div dojoType='unieap.form.ComboBox' width='100%' maxLength='40' id='deptLevel' required='true'
+                  popup="{height:'300px'}" dataProvider="{store:'deptLevel'}"
+                  dataFilter="{searchAttr:['display','value'],spellAttr:'py'}" binding="{name:'deptLevel'}"
+                  decoder="{displayAttr:'display',valueAttr:'value'}">
+                </div>
+              </td>
+              <td rowSpan='1' id='deptShow_label_td' align='right'>
+                <label id='deptShow_label'>科室展示</label>
+              </td>
+              <td rowSpan='1' colSpan='1' id='deptShow_td'>
+                <div dojoType='unieap.form.ComboBox' hasDefault='true'
+                  class='combo_button_style combo_button_style_gray' width='100%' value='2' threeSelection='two'
+                  id='deptShow' required='true' popup="{height:'300px'}" dataProvider="{store:'dept_direction'}"
+                  dataFilter="{spellAttr:'py'}" binding="{name:'deptShow'}">
+                </div>
+              </td>
+            </tr>
+            <tr id='form1_7_tr'>
+              <td rowSpan='1' id='branch_label_td' align='right'>
+                <label id='branch_label'>院区</label>
+              </td>
+              <td rowSpan='1' colSpan='1' id='branch_td'>
+                <div dojoType='unieap.form.ComboBox' width='100%' id='branch'
+                  popup="{height:'300px',displayStyle:'multi'}" dataProvider="{store:'sysBranch'}"
+                  dataFilter="{searchAttr:['branchName','branchCode'],spellAttr:'py'}" binding="{name:'branch'}"
+                  decoder="{displayAttr:'branchName',valueAttr:'branchId'}">
+                </div>
+              </td>
+              <td rowSpan='1' id='attrCode_label_td' align='right'>
+                <label id='attrCode_label'>科室属性</label>
+              </td>
+              <td rowSpan='1' colSpan='1' id='attrCode_td'>
+                <div dojoType='unieap.form.ComboBox' width='100%' id='attrCode' popup="{height:'300px'}"
+                  dataProvider="{store:'source_type'}" dataFilter="{searchAttr:['CODENAME','CODEVALUE'],spellAttr:'py'}"
+                  binding="{name:'attrCode'}">
+                </div>
+              </td>
+              <td rowSpan='1' id='dept_label_td' align='right'>
+                <label id='dept_label'>核算科室</label>
+              </td>
+              <td rowSpan='1' colSpan='1' id='dept_td'>
+                <div dojoType='unieap.form.ComboBox' width='100%' id='dept'
+                  popup="{height:'300px',displayStyle:'multi'}" dataProvider="{store:'dept'}"
+                  dataFilter="{searchAttr:['name','code'],spellAttr:'py'}" binding="{name:'dept'}"
+                  decoder="{displayAttr:'name',valueAttr:'id'}">
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class='query_buttons' id='div2'>
+        <div dojoType='unieap.form.Button' label='查询' id='queryBtn'></div>
+      </div>
+      <div class='limit_buttons' id='div5'>
+        <div dojoType='unieap.form.Button' label='打印' id='btnPrint'></div>
+        <div dojoType='unieap.form.Button' label='打印设置' class='btn-primary' id='printSet'></div>
+        <label width='100%' id='label1' height='25px' style='float:right;'>金额单位:元</label>
+      </div>
+      <div id='div1' type='buttons' style='display:none;'>
+        <div id='div3'>
+        </div>
+        <div class='limit_buttons' id='div4'>
+          <div dojoType='unieap.form.Button' label='打印' id='printBtn' style='display:none;'></div>
+        </div>
+      </div>
+    </div>
+    <div dojoType='unieap.layout.AdaptivePane' autoHeight='true' height='100%' width='auto'>
+      <div dojoType='unieap.xgrid.Grid' height='100%' id='grid1' views="{rowBar:false,rowNumber:false}"
+        selection="{selectType:'none'}" edit="{editType:'readonly'}" binding="{store:'deptReportGrid'}">
+        <toolbar paging="{display:false,userPageSize:'false'}">
+        </toolbar>
+        <header>
+          <row>
+            <cell label='temp' dataType='string' name='temp' width='1px' canSort='false' headerStyles='text-align:left;'
+              id='cell_temp' enable='false'></cell>
+          </row>
+        </header>
+      </div>
+    </div>
+  </div>
+
+
+
+</body>
+
+</html>
